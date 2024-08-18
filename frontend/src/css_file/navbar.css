@@ -1,0 +1,237 @@
+/* General Reset and Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10vw;
+    position: relative;
+    background-color: transparent;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    transition: all 0.3s ease;
+}
+
+.logo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo i {
+    opacity: 0.7;
+    color: #fff;
+    font-size: 22px;
+    padding: 6px;
+    border-radius: 4px;
+    background-color: #0D6EFD;
+    transition: all 0.3s ease;
+}
+
+.logo span {
+    color: #0D6EFD;
+    font-size: 22px;
+    font-family: Papyrus, fantasy;
+    transition: color 0.3s ease;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle:hover {
+    transform: rotate(90deg);
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    /* gap: 30px; */
+    transition: all 0.3s ease;
+}
+
+.search {
+    border-radius: 8px 0 0 8px;
+    border: #127FFF 2px solid;
+    padding: 7.5px 24px;
+    transition: all 0.3s ease;
+}
+
+.searchbar input {
+    border: none;
+    width: 300px;
+    outline: none;
+    font-size: 16px;
+    color: #0a0a0a;
+    transition: width 0.3s ease;
+    background-color: transparent;
+}
+
+.searchbar input::placeholder {
+    font-size: 16px;
+    color: #8B96A5;
+}
+
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #127FFF;
+    border: none;
+    padding: 10px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-btn i {
+    color: #FFFFFF;
+    font-size: 22px;
+    transition: transform 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #0D6EFD;
+    /* transform: translateY(-2px); */
+}
+
+.search-btn:hover i {
+    transform: scale(1.1);
+}
+
+.icons {
+    margin-top: 5px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.icon i {
+    font-size: 25px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon span {
+    font-size: 12px;
+    color: #8B96A5;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icon:hover i {
+    color: #127FFF;
+    transform: scale(1.1);
+}
+
+.icon:hover span {
+    color: #127FFF;
+    transform: translateY(-2px);
+}
+
+.search-icon {
+    display: none;
+    /* Hide the search icon by default */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 845px) {
+    .searchbar input {
+        width: 200px;
+    }
+
+    .icon span {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 686px) {
+    .menu-toggle {
+        display: block;
+        font-size: 28px;
+        color: #0D6EFD;
+    }
+
+    .icons {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        background-color: #fff;
+        position: absolute;
+        top: 60px;
+        right: 10vw;
+        border-radius: 8px;
+        padding: 10px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .icons.active {
+        display: flex;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .searchbar {
+        display: none;
+    }
+
+    .search-icon {
+        display: block;
+        /* Show the search icon on mobile devices */
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+@media screen and (max-width: 506px) {
+    .search {
+        padding: 8px 12px;
+    }
+
+    .search-btn {
+        padding: 8px 12px;
+    }
+
+    .searchbar input {
+        width: 140px;
+    }
+
+    .nav {
+        padding: 30px 4vw;
+    }
+}

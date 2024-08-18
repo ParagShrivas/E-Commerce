@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css_file/loginStyle.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Alert from './Alert';
 
 export default function LoginPage(props) {
@@ -11,6 +11,15 @@ export default function LoginPage(props) {
      const [fname, setFname] = useState('');
      const [lname, setLname] = useState('');
      const navigate = useNavigate(); // Correctly use useNavigate
+
+     const [alert, setAlert] = useState(null);
+
+     const showAlert = async (message) => {
+          setAlert({ msg: message });
+          setTimeout(() => {
+               setAlert(null);
+          }, 5000);
+     };
 
      const toggleClass = () => {
           SetClass(SignUpMode === '' ? 'sign-up-mode' : '');
@@ -31,9 +40,11 @@ export default function LoginPage(props) {
 
                const res = await response.json();
                if (response.ok) {
+                    showAlert("Login Successful")
                     navigate('/dashboard', { state: { message: res.message } }); // Redirect to dashboard
                } else {
                     navigate('/login', { state: { message: res.message } }); // Redirect to login
+                    showAlert(res.message);
                     console.error('Login failed:', res.message);
                }
           } catch (error) {
@@ -49,38 +60,24 @@ export default function LoginPage(props) {
                const response = await fetch('http://localhost:1500/login/register/user', {
                     method: 'POST',
                     headers: {
-                         'Content-Type': 'application/json',
-                    },
+                        'Content-Type': 'application/json',
+                    }, 
                     body: JSON.stringify(UserData),
                });
 
                const result = await response.json();
                if (response.ok) {
                     navigate('/login', { state: { message: result.message } }, window.location.reload()); // Redirect to login page
+                    showAlert(result.message)
                } else {
                     navigate('/login', { state: { message: result.message } })
+                    showAlert(result.message)
                     console.error('Sign-up failed:', result.message);
                }
           } catch (error) {
                console.error('Error during sign-up:', error);
           }
      };
-     const location = useLocation(); // Access the location object
-     var res_message = location.state?.message || ''; // Get the message from state
-
-     const [alert, setAlert] = useState(null);
-
-     const showAlert = (message) => {
-          setAlert({ msg: message });
-          setTimeout(() => {
-               setAlert(null);
-               res_message = '';
-          }, 5000);
-     };
-
-     const login_signup = () => {
-          if (res_message !== '') { showAlert(res_message) }
-     }
 
      return (
           <div className={`container ${SignUpMode}`}>
@@ -105,7 +102,7 @@ export default function LoginPage(props) {
                                         onChange={(e) => setPassword(e.target.value)}
                                    />
                               </div>
-                              <input type="submit" value="Login" className="btn solid" onClick={login_signup} />
+                              <input type="submit" value="Login" className="btn solid" />
                               <p className="social-text">Or Sign up with social platforms</p>
                               <div className="social-media">
                                    <a href="/" className="social-icon">
@@ -166,7 +163,7 @@ export default function LoginPage(props) {
                                         onChange={(e) => setPassword2(e.target.value)}
                                    />
                               </div>
-                              <input type="submit" className="btn" value="Sign up" onClick={login_signup} />
+                              <input type="submit" className="btn" value="Sign up" />
                               <p className="social-text">Or Sign up with social platforms</p>
                               <div className="social-media">
                                    <a href="/" className="social-icon">
