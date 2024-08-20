@@ -3,6 +3,7 @@ import LoginPage from './components/LoginPage';
 import AdminDashboardPage from './components/AdminDashboardPage';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
+import Photo from './components/Photo';
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/upload" element={<Photo />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/dashboard" element={<AdminDashboardPage />} />
             </Routes>

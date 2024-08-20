@@ -95,7 +95,7 @@ const HomePage = () => {
                                              <img src={item.src} alt="" />
                                         </div>
                                    </div>
-                                   <div className="content">
+                                   <div className="home-content">
                                         <img src={item.src.replace(/\d+/, index + 1)} alt="" />
                                         <div className="text">
                                              <h1>{item.title}</h1>
