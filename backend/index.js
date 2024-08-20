@@ -13,7 +13,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
    
-
 // Routes
 app.use('/login', Auth);
 app.use('/upload', photos);
