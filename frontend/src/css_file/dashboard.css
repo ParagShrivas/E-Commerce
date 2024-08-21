@@ -195,25 +195,25 @@ input[type="date"] {
 table {
      /* display: inline; */
      position: absolute;
-     width: 56%;
+     width: 50%;
      height: 60%;
-     left: 17.5%;
-     top: 53%;
+     left: 21%;
+     top: 40%;
      border-collapse: collapse;
 }
 
 .table h2 {
      color: #3f4441;
-     top: 47%;
-     left: 18%;
+     top: 34%;
+     left: 21%;
      position: absolute;
 }
 
 .table a {
      color: #5319f2;
      background-color: transparent;
-     top: 47%;
-     left: 69%;
+     top: 34%;
+     left: 66%;
      position: absolute;
      width: 75px;
 }
@@ -230,15 +230,17 @@ td {
      border-bottom: 3px solid #ddd;
      /* Thicker border for the header */
 }
+
 .recent-updates {
      height: 220px;
      width: 330px;
      position: absolute;
-     top: 15%;
+     top: 3%;
      left: 77%;
      border-radius: 20px;
 }
-.recent-updates .card{
+
+.recent-updates .card {
      width: 90%;
      height: 22%;
      margin-left: 8px;
@@ -251,7 +253,7 @@ td {
 
 .recent-updates p {
      text-align: center;
-     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .recent-updates i {
@@ -262,7 +264,7 @@ td {
      width: 380px;
      height: 200px;
      position: absolute;
-     top: 50%;
+     top: 37%;
      left: 74%;
      border-radius: 20px;
      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;

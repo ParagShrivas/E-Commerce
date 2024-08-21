@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css_file/HomePage.css";
 import Logo from './Logo';
-import LoginPage from "./LoginPage";
+import Navbar from "./Navbar";
 
 const HomePage = () => {
      const [rotate, setRotate] = useState(0);
@@ -79,6 +79,7 @@ const HomePage = () => {
 
      return (
           <>
+               <Navbar />
                <div className="slider_container">
                     <div className="background-rotate">
                          <div className="bg-rotate"></div>

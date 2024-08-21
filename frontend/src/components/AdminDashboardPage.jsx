@@ -1,5 +1,6 @@
 import React from 'react'
 import '../css_file/dashboard.css'
+import SideNav from './SideNav'
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend, Colors } from 'chart.js';
 
@@ -53,50 +54,7 @@ export default function AdminDashboardPage() {
      return (
           <>
                <div className='dashboard-container'>
-                    <div className='dashboard-nav'>
-                         <ul>
-                              <li><a href="#" className="logo">
-                                   <i className='bx bxs-shopping-bag'></i>
-                                   <span className="nav-item">Dream mall</span>
-                              </a></li>
-                              <li><a href="#">
-                                   <i className="fas fa-home"></i>
-                                   <span className="nav-item">Home</span>
-                              </a></li>
-                              <li><a href="">
-                                   <i className="fas fa-user"></i>
-                                   <span className="nav-item">Users</span>
-                              </a></li>
-                              <li><a href="">
-                                   <i className="fas fa-clipboard-list"></i>
-                                   <span className="nav-item">Products</span>
-                              </a></li>
-                              <li><a href="">
-                                   <i className="fas fa-solid fa-chart-line"></i>
-                                   <span className="nav-item">Analysis</span>
-                              </a></li>
-                              <li><a href="">
-                                   <i className="fas fa-solid fa-truck-fast"></i>
-                                   <span className="nav-item">Orders</span>
-                              </a></li>
-                              <li><a href="">
-                                   <i className="fas fa-cog"></i>
-                                   <span className="nav-item">Settings</span>
-                              </a></li>
-                              <li><a href="">
-                                   <i class="fas fa-solid fa-circle-info"></i>
-                                   <span className="nav-item">Support</span>
-                              </a></li>
-                              <li><a href="">
-                                   <i className="fas fa-plus"></i>
-                                   <span className="nav-item">Add Product</span>
-                              </a></li>
-                              <li><a href="" className="logout">
-                                   <i className="fas fa-sign-out-alt"></i>
-                                   <span className="nav-item">Log out</span>
-                              </a></li>
-                         </ul>
-                    </div>
+                    <SideNav />
                     <div className="main">
                          <div className="main-top">
                               <h2>Admin Dashboard</h2>
@@ -109,12 +67,12 @@ export default function AdminDashboardPage() {
                                    <p>1500</p>
                               </div>
                               <div className="card">
-                                   <i class="fas fa-money-bill-wave"></i>
+                                   <i className="fas fa-money-bill-wave"></i>
                                    <h3>Income</h3>
                                    <p>₹89,2000</p>
                               </div>
                               <div className="card">
-                                   <i class="fa-solid fa-boxes-packing"></i>
+                                   <i className="fa-solid fa-boxes-packing"></i>
                                    <h3>Product Sold</h3>
                                    <p>1,00,000</p>
                               </div>
@@ -157,17 +115,17 @@ export default function AdminDashboardPage() {
                <div className="recent-updates">
                     <p>Recent updates</p>
                     <div className="card">
-                         <i class="fa-solid fa-bell"></i>
+                         <i className="fa-solid fa-bell"></i>
                          <span>New Orders</span>
                          <span style={{ 'margin-left': '110px' }}>+50</span>
                     </div><br />
                     <div className="card">
-                         <i class="fa-solid fa-bell"></i>
+                         <i className="fa-solid fa-bell"></i>
                          <span>New Customers</span>
                          <span style={{ 'margin-left': '80px' }}>+15</span>
                     </div><br />
                     <div className="card">
-                         <i class="fa-solid fa-bell"></i>
+                         <i className="fa-solid fa-bell"></i>
                          <span>Order Delivered</span>
                          <span style={{ 'margin-left': '80px' }}>+20</span>
                     </div>

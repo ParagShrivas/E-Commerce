@@ -74,7 +74,7 @@ export default function LoginPage(props) {
                     showAlert(result.message)
                     navigate('/', { state: { message: result.message } }, window.location.reload()); // Redirect to login page
                } else {
-                    navigate('/login', { state: { message: result.message } })
+                    navigate('/login3', { state: { message: result.message } })
                     showAlert(result.message)
                     console.error('Sign-up failed:', result.message);
                }

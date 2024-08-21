@@ -40,7 +40,7 @@ function Alert({ alert }) {
             {alert && (
                 <div className={`toast ${isActive ? "active" : ""}`}>
                     <div className="toast-content">
-                        <i class="fa-regular fa-bell"></i>
+                        <i className="fa-regular fa-bell"></i>
                         <div className="message">
                             <span className="text text-2">{alert.msg}</span>
                         </div>
