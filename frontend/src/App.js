@@ -3,6 +3,7 @@ import LoginPage from './components/LoginPage';
 import AdminDashboardPage from './components/AdminDashboardPage';
 import HomePage from './components/HomePage';
 import AddProduct from './components/AddProduct';
+import ProductTable from './components/ProductTable';
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Route exact path="/" element={<HomePage />} />
                 <Route exact path="/login" element={<LoginPage />} />
                 <Route exact path="/dashboard" element={<AdminDashboardPage />} />
+                <Route exact path="/dashboard/products" element={<ProductTable />} />
                 <Route exact path="/dashboard/add_product" element={<AddProduct />} />
             </Routes>
         </Router>

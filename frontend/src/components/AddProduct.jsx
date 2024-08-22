@@ -67,6 +67,9 @@ const ProductForm = () => {
                const res = await response.json();
                if (response.ok) {
                     showAlert(res.message);
+                    setTimeout(() => {
+                         window.location.reload();
+                    }, 2000);
                } else {
                     showAlert(res.message);
                }

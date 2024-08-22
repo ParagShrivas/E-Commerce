@@ -10,7 +10,7 @@ export default function SideNav() {
                               <i className='bx bxs-shopping-bag'></i>
                               <span className="nav-item">Dream mall</span>
                          </a></li>
-                         <li><a href="#">
+                         <li><a href="/dashboard">
                               <i className="fas fa-home"></i>
                               <span className="nav-item">Home</span>
                          </a></li>
@@ -18,7 +18,7 @@ export default function SideNav() {
                               <i className="fas fa-user"></i>
                               <span className="nav-item">Users</span>
                          </a></li>
-                         <li><a href="">
+                         <li><a href="/dashboard/products">
                               <i className="fas fa-clipboard-list"></i>
                               <span className="nav-item">Products</span>
                          </a></li>
