@@ -175,7 +175,7 @@ const ProductTable = () => {
                 <div className="overlay">
                     <div className="confirm-popup">
                         <h4>Confirm
-                            <i class="fa-solid fa-xmark" style={{ marginLeft: '250px', cursor: 'pointer' }} onClick={() => { handleDeleteClick(false) }}></i>
+                            <i className="fa-solid fa-xmark" style={{ marginLeft: '250px', cursor: 'pointer' }} onClick={() => { handleDeleteClick(false) }}></i>
                         </h4>
                         <img src={`http://localhost:1500/products/${selectedProduct.photoname}`} alt="" width={'200px'} height={'200px'} />
                         <p>
@@ -198,7 +198,7 @@ const ProductTable = () => {
                 <div className="overlay">
                     <div className="manage_product">
                         <h3 style={{ color: '#3b3837' }}>Product Details
-                            <i class="fa-solid fa-xmark" style={{ marginLeft: '220px', cursor: 'pointer' }} onClick={() => { handleManageClick(false) }}></i>
+                            <i className="fa-solid fa-xmark" style={{ marginLeft: '220px', cursor: 'pointer' }} onClick={() => { handleManageClick(false) }}></i>
                         </h3>
                         <img src={photoURL ? photoURL : `http://localhost:1500/products/${selectedManageProduct.photoname}`} alt="" width={'200px'} height={'200px'} />
                         <p>Image size must be less than 2MB</p>
@@ -245,11 +245,11 @@ const ProductTable = () => {
                                 color: '#635df9'
                             }}
                                 onClick={() => { handleManageClick(false) }}>
-                                <i class="fa-solid fa-xmark" style={{ padding: '5px' }}></i>
+                                <i className="fa-solid fa-xmark" style={{ padding: '5px' }}></i>
                                 Cancel
                             </button>
                             <button className="con-btn" onClick={handleSave}>
-                                <i class="fa-solid fa-check" style={{ padding: '5px' }}></i>
+                                <i className="fa-solid fa-check" style={{ padding: '5px' }}></i>
                                 Save
                             </button>
                         </span>

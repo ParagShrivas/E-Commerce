@@ -12,6 +12,16 @@ const ProductForm = () => {
      const [category, setCategory] = useState('');
      const [imagePreview, setImagePreview] = useState(null);
 
+     const handleFocus = (e) => {
+          e.target.parentNode.classList.add('focus');
+     };
+
+     const handleBlur = (e) => {
+          if (e.target.value === '') {
+               e.target.parentNode.classList.remove('focus');
+          }
+     };
+
      const handlePhotoChange = (e) => {
           const file = e.target.files[0];
           if (file && file.size < 2000000) {
@@ -59,7 +69,7 @@ const ProductForm = () => {
                     showAlert(res.message);
                     setTimeout(() => {
                          window.location.reload();
-                    }, 1000);
+                    }, 2000);
                } else {
                     showAlert(res.message);
                }
@@ -112,6 +122,8 @@ const ProductForm = () => {
                                              className="input"
                                              value={product_name}
                                              onChange={(e) => setProductName(e.target.value)}
+                                             onFocus={handleFocus}
+                                             onBlur={handleBlur}
                                         />
                                         <label>Product Name</label>
                                         <span>Product Name</span>
@@ -124,7 +136,8 @@ const ProductForm = () => {
                                              className="input"
                                              value={price}
                                              onChange={(e) => setPrice(e.target.value)}
-
+                                             onFocus={handleFocus}
+                                             onBlur={handleBlur}
                                         />
                                         <label>Price</label>
                                         <span>Price</span>
@@ -137,7 +150,8 @@ const ProductForm = () => {
                                              className="input"
                                              value={quantity}
                                              onChange={(e) => setQuantity(e.target.value)}
-
+                                             onFocus={handleFocus}
+                                             onBlur={handleBlur}
                                         />
                                         <label>Quantity</label>
                                         <span>Quantity</span>
@@ -149,7 +163,8 @@ const ProductForm = () => {
                                              className="input"
                                              value={category}
                                              onChange={(e) => setCategory(e.target.value)}
-
+                                             onFocus={handleFocus}
+                                             onBlur={handleBlur}
                                         >
                                              <option style={{ backgroundColor: '#000' }} value="" disabled>Select Category</option>
                                              <option style={{ backgroundColor: '#000' }} value="electronics">Electronics</option>
@@ -169,7 +184,8 @@ const ProductForm = () => {
                                              className="input"
                                              value={description}
                                              onChange={(e) => setDescription(e.target.value)}
-
+                                             onFocus={handleFocus}
+                                             onBlur={handleBlur}
                                         ></textarea>
                                         <label>Description</label>
                                         <span>Description</span>
