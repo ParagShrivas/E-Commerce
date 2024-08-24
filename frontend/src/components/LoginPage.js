@@ -3,6 +3,7 @@ import '../css_file/loginStyle.css';
 import '../css_file/otp.css';
 import { useNavigate } from 'react-router-dom';
 import Alert from './Alert';
+import Navbar from './Navbar';
 import '../css_file/Loader.css';
 
 export default function LoginPage(props) {
@@ -74,7 +75,7 @@ export default function LoginPage(props) {
                     showAlert(result.message)
                     navigate('/', { state: { message: result.message } }, window.location.reload()); // Redirect to login page
                } else {
-                    navigate('/login3', { state: { message: result.message } })
+                    navigate('/login', { state: { message: result.message } })
                     showAlert(result.message)
                     console.error('Sign-up failed:', result.message);
                }
@@ -144,162 +145,165 @@ export default function LoginPage(props) {
      };
 
      return (
-          <div className={`container ${SignUpMode}`}>
-               <Alert alert={alert} />
-               <div className="forms-container">
-                    <div className="signin-signup">
-                         <form onSubmit={Login} className="sign-in-form">
-                              <h2 className="title">Sign in</h2>
-                              <div className="input-field">
-                                   <i className="fas fa-user"></i>
-                                   <input
-                                        type="text"
-                                        placeholder="Email"
-                                        onChange={(e) => setEmail(e.target.value)}
-                                   />
-                              </div>
-                              <div className="input-field">
-                                   <i className="fas fa-lock"></i>
-                                   <input
-                                        type="password"
-                                        placeholder="Password"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                   />
-                              </div>
-                              <input type="submit" value="Login" className="btn solid" />
-                              <p className="social-text">Or Sign up with social platforms</p>
-                              <div className="social-media">
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-facebook-f"></i>
-                                   </a>
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-twitter"></i>
-                                   </a>
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-google"></i>
-                                   </a>
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-linkedin-in"></i>
-                                   </a>
-                              </div>
-                         </form>
-
-                         <form onSubmit={SignUp} className="sign-up-form">
-                              <h2 className="title">Sign up</h2>
-                              <div className="input-field">
-                                   <i className="fas fa-user"></i>
-                                   <input
-                                        type="text"
-                                        placeholder="First name"
-                                        onChange={(e) => setFname(e.target.value)}
-                                   />
-                              </div>
-                              <div className="input-field">
-                                   <i className="fas fa-user"></i>
-                                   <input
-                                        type="text"
-                                        placeholder="Last name"
-                                        onChange={(e) => setLname(e.target.value)}
-                                   />
-                              </div>
-                              <div className="input-field">
-                                   <i className="fas fa-envelope"></i>
-                                   <input
-                                        type="email"
-                                        placeholder="Email"
-                                        onChange={(e) => setEmail(e.target.value)}
-                                   />
-                              </div>
-                              <div className="input-field">
-                                   <i className="fas fa-lock"></i>
-                                   <input
-                                        type="text"
-                                        placeholder="Password"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                   />
-                              </div>
-                              <div className="input-field">
-                                   <i className="fas fa-lock"></i>
-                                   <input
-                                        type="password"
-                                        placeholder="Re Enter Password"
-                                        onChange={(e) => setPassword2(e.target.value)}
-                                   />
-                              </div>
-                              <input type="submit" className="btn" value="Sign up" />
-                              <p className="social-text">Or Sign up with social platforms</p>
-                              <div className="social-media">
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-facebook-f"></i>
-                                   </a>
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-twitter"></i>
-                                   </a>
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-google"></i>
-                                   </a>
-                                   <a href="/" className="social-icon">
-                                        <i className="fab fa-linkedin-in"></i>
-                                   </a>
-                              </div>
-                         </form>
-                    </div>
-               </div>
-
-               <div className="panels-container">
-                    <div className="panel left-panel">
-                         <div className="content">
-                              <h3>New here?</h3>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                              <button className="btn transparent" id="sign-up-btn" onClick={toggleClass}>
-                                   Sign up
-                              </button>
-                         </div>
-                         <img src="img/register.png" className="image" alt="Sign up illustration" />
-                    </div>
-
-                    <div className="panel right-panel">
-                         <div className="content">
-                              <h3>One of us?</h3>
-                              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                              <button className="btn transparent" id="sign-in-btn" onClick={toggleClass}>
-                                   Sign in
-                              </button>
-                         </div>
-                         <img src="img/register.png" className="image" alt="Sign in illustration" />
-                    </div>
-               </div>
-
-               {showOTP && (
-                    <div className="overlay">
-                         <div className="otp-popup">
-                              <h4>Enter OTP Code</h4>
-                              <div className="input-field">
-                                   {otp.map((value, index) => (
+          <>
+               <Navbar />
+               <div className={`container ${SignUpMode}`}>
+                    <Alert alert={alert} />
+                    <div className="forms-container">
+                         <div className="signin-signup">
+                              <form onSubmit={Login} className="sign-in-form">
+                                   <h2 className="title">Sign in</h2>
+                                   <div className="input-field">
+                                        <i className="fas fa-user"></i>
                                         <input
-                                             key={index}
                                              type="text"
-                                             value={value}
-                                             ref={(el) => (inputRefs.current[index] = el)}
-                                             onChange={(e) => handleOtpChange(e, index)}
-                                             onKeyDown={(e) => handleBackspace(e, index)}
-                                             disabled={index !== 0 && otp[index - 1] === ''} // Disable inputs until the previous one is filled
-                                             className="otp-input"
+                                             placeholder="Email"
+                                             onChange={(e) => setEmail(e.target.value)}
                                         />
-                                   ))}
-                              </div>
+                                   </div>
+                                   <div className="input-field">
+                                        <i className="fas fa-lock"></i>
+                                        <input
+                                             type="password"
+                                             placeholder="Password"
+                                             onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                   </div>
+                                   <input type="submit" value="Login" className="btn solid" />
+                                   <p className="social-text">Or Sign up with social platforms</p>
+                                   <div className="social-media">
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-facebook-f"></i>
+                                        </a>
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-twitter"></i>
+                                        </a>
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-google"></i>
+                                        </a>
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-linkedin-in"></i>
+                                        </a>
+                                   </div>
+                              </form>
 
-                              <button className="btn solid" onClick={verifyOtp}>
-                                   Verify OTP
-                              </button>
+                              <form onSubmit={SignUp} className="sign-up-form">
+                                   <h2 className="title">Sign up</h2>
+                                   <div className="input-field">
+                                        <i className="fas fa-user"></i>
+                                        <input
+                                             type="text"
+                                             placeholder="First name"
+                                             onChange={(e) => setFname(e.target.value)}
+                                        />
+                                   </div>
+                                   <div className="input-field">
+                                        <i className="fas fa-user"></i>
+                                        <input
+                                             type="text"
+                                             placeholder="Last name"
+                                             onChange={(e) => setLname(e.target.value)}
+                                        />
+                                   </div>
+                                   <div className="input-field">
+                                        <i className="fas fa-envelope"></i>
+                                        <input
+                                             type="email"
+                                             placeholder="Email"
+                                             onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                   </div>
+                                   <div className="input-field">
+                                        <i className="fas fa-lock"></i>
+                                        <input
+                                             type="text"
+                                             placeholder="Password"
+                                             onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                   </div>
+                                   <div className="input-field">
+                                        <i className="fas fa-lock"></i>
+                                        <input
+                                             type="password"
+                                             placeholder="Re Enter Password"
+                                             onChange={(e) => setPassword2(e.target.value)}
+                                        />
+                                   </div>
+                                   <input type="submit" className="btn" value="Sign up" />
+                                   <p className="social-text">Or Sign up with social platforms</p>
+                                   <div className="social-media">
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-facebook-f"></i>
+                                        </a>
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-twitter"></i>
+                                        </a>
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-google"></i>
+                                        </a>
+                                        <a href="/" className="social-icon">
+                                             <i className="fab fa-linkedin-in"></i>
+                                        </a>
+                                   </div>
+                              </form>
                          </div>
                     </div>
-               )}
-               {loading && (
-                    <div className="overlay">
-                         <div className="loader"></div>
+
+                    <div className="panels-container">
+                         <div className="panel left-panel">
+                              <div className="content">
+                                   <h3>New here?</h3>
+                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                   <button className="btn transparent" id="sign-up-btn" onClick={toggleClass}>
+                                        Sign up
+                                   </button>
+                              </div>
+                              <img src="img/register.png" className="image" alt="Sign up illustration" />
+                         </div>
+
+                         <div className="panel right-panel">
+                              <div className="content">
+                                   <h3>One of us?</h3>
+                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                   <button className="btn transparent" id="sign-in-btn" onClick={toggleClass}>
+                                        Sign in
+                                   </button>
+                              </div>
+                              <img src="img/register.png" className="image" alt="Sign in illustration" />
+                         </div>
                     </div>
-               )}
-          </div>
+
+                    {showOTP && (
+                         <div className="overlay">
+                              <div className="otp-popup">
+                                   <h4>Enter OTP Code</h4>
+                                   <div className="input-field">
+                                        {otp.map((value, index) => (
+                                             <input
+                                                  key={index}
+                                                  type="text"
+                                                  value={value}
+                                                  ref={(el) => (inputRefs.current[index] = el)}
+                                                  onChange={(e) => handleOtpChange(e, index)}
+                                                  onKeyDown={(e) => handleBackspace(e, index)}
+                                                  disabled={index !== 0 && otp[index - 1] === ''} // Disable inputs until the previous one is filled
+                                                  className="otp-input"
+                                             />
+                                        ))}
+                                   </div>
+
+                                   <button className="btn solid" onClick={verifyOtp}>
+                                        Verify OTP
+                                   </button>
+                              </div>
+                         </div>
+                    )}
+                    {loading && (
+                         <div className="overlay">
+                              <div className="loader"></div>
+                         </div>
+                    )}
+               </div>
+          </>
      );
 }

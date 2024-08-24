@@ -55,4 +55,38 @@ router.post('/add_product', upload.single('photo'), (req, res) => {
      });
 });
 
+router.post('/delete/:id', async (req, res) => {
+
+     const product_id = req.params.id;
+     const query = 'delete from products where product_id=($1)';
+
+     db.query(query, [product_id], (err, result) => {
+          if (err) {
+               return res.status(500).json({ message: 'Database error', error: err });
+          }
+
+          res.status(200).json({ message: 'Product Deleted successfully!' });
+     });
+});
+
+router.post('/update', upload.single('photo'), (req, res) => {
+     const { product_id, product_name, category, description, price, quantity } = req.body;
+
+     if (!product_name || !category || !description || !price || !quantity) {
+          return res.status(400).json({ message: 'Please fill in all details' });
+     }
+
+     const photoname = req.file ? req.file.filename : null;
+
+     const query = 'UPDATE products SET product_name = $1,description = $2,price = $3,quantity = $4,category = $5,photoname = $6 WHERE product_id = $7';
+
+     db.query(query, [product_name, description, price, quantity, category, photoname, product_id], (err, result) => {
+          if (err) {
+               return res.status(500).json({ message: 'Database error', error: err });
+          }
+
+          res.status(200).json({ message: 'Product updated successfully!' });
+     });
+});
+
 module.exports = router;

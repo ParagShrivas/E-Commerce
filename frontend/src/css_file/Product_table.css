@@ -4,6 +4,7 @@
 }
 
 .Datatable {
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
      padding: 10px;
      width: 75em;
      color: #000;
@@ -13,13 +14,15 @@
      background-color: #7aabf5;
      width: 250px;
      height: 40px;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 16px;
      border-radius: 10px;
      border: 2px solid #000;
-     color: #000;
+     color: #fff;
 }
 
 .search-filter::placeholder {
-     color: #000;
+     color: #fff;
      font-size: 15px;
      padding: 10px;
 }
@@ -35,4 +38,42 @@
      border: 2px solid #000;
      margin-right: 10px;
      border-radius: 100%;
+}
+
+.delete-btn {
+     color: #fff;
+     background-color: rgb(234, 49, 24);
+     width: 100px;
+     height: 40px;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 16px;
+     border: 2px solid #000;
+     border-radius: 10px;
+     position: absolute;
+     right: 81%;
+}
+
+.delete-btn i {
+     padding: 5px;
+}
+
+.add-btn {
+     color: #fff;
+     background-color: rgb(119, 104, 235);
+     width: 100px;
+     height: 40px;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 16px;
+     border: 2px solid #000;
+     border-radius: 10px;
+     position: absolute;
+     right: 90%;
+}
+
+.add-btn i {
+     padding: 5px;
+}
+
+button {
+     cursor: pointer;
 }
