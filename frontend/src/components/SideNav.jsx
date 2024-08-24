@@ -14,7 +14,7 @@ export default function SideNav() {
                               <i className="fas fa-home"></i>
                               <span className="nav-item">Home</span>
                          </a></li>
-                         <li><a href="">
+                         <li><a href="/dashboard/users">
                               <i className="fas fa-user"></i>
                               <span className="nav-item">Users</span>
                          </a></li>

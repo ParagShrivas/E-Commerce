@@ -74,27 +74,36 @@ const ProductTable = () => {
         {
             name: 'Photo',
             selector: (rows) => <img width={100} src={`http://localhost:1500/products/${rows.photoname}`} alt={rows.product_name} />,
-            width: '200px'
+            width: '130px'
         },
         {
             name: 'Product Name',
             selector: (rows) => rows.product_name.slice(0, 25) + '...',
-            width: '200px'
+            width: '200px',
+            sortable: true
         },
         {
             name: 'Description',
             selector: (rows) => rows.description.slice(0, 100),
-            width: '200px'
+            width: '300px'
         },
         {
             name: 'Price',
             selector: (rows) => '₹ ' + rows.price,
-            width: '200px'
+            width: '100px',
+            sortable: true
+        },
+        {
+            name: 'Stock',
+            selector: (rows) => '₹ ' + rows.quantity,
+            width: '110px',
+            sortable: true
         },
         {
             name: 'Category',
             selector: (rows) => rows.category,
-            width: '200px'
+            width: '140px',
+            sortable: true
         },
         {
             name: '',
@@ -276,6 +285,8 @@ const ProductTable = () => {
                     }}
                     columns={columns}
                     data={filterSearch}
+                    fixedHeader
+                    fixedHeaderScrollHeight='500px'
                     selectableRows
                     selectableRowsHighlight
                     highlightOnHover
