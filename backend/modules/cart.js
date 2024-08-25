@@ -113,7 +113,7 @@ router.post('/remove', async(req, res)=>{
     if(!user_id || !product_id){
         return res.status(400).json({
             success:false,
-            message: "Failed to obtain info"
+            message: "Enter user_id and product_id"
         })
     }
    
@@ -144,5 +144,86 @@ router.post('/remove', async(req, res)=>{
         })
 
     }
+})
+
+router.post('/incr', async (req, res)=>{
+
+    const {user_id , product_id} = req.body
+    if(!user_id || !product_id){
+        return res.status(400).json({
+            success:false,
+            message: "Enter user_id and product_id"
+        })
+    }
+
+    try {
+        
+        const result = await db.query(
+            'UPDATE Cart SET quantity = quantity + 1 WHERE user_id = $1 AND product_id = $2 RETURNING *',
+            [user_id, product_id]
+        );
+
+        
+        if (result.rowCount > 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'Item quantity increased',
+                data: result.rows[0] 
+            });
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: 'Item not found in cart'
+            });
+        }
+
+    } catch (err) {
+        console.error('Error increasing item quantity:', err);
+        return res.status(500).json({
+            success: false,
+            message: 'Problem occurred while increasing item quantity'
+        });
+    }
+    
+})
+router.post('/decr', async (req, res)=>{
+
+    const {user_id , product_id, quantity} = req.body
+    if(!user_id || !product_id){
+        return res.status(400).json({
+            success:false,
+            message: "Enter user_id and product_id"
+        })
+    }
+
+    try {
+        
+        const result = await db.query(
+            'UPDATE Cart SET quantity = quantity - 1 WHERE user_id = $1 AND product_id = $2 AND quantity > 1 RETURNING *',
+            [user_id, product_id]
+        );
+
+        
+        if (result.rowCount > 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'Item quantity decreased',
+                data: result.rows[0] 
+            });
+        } else {
+            return res.status(404).json({
+                success: false,
+                message: 'More than one element required to decrease quantity'
+            });
+        }
+
+    } catch (err) {
+        console.error('Error decreasing item quantity:', err);
+        return res.status(500).json({
+            success: false,
+            message: 'Problem occurred while decreasing item quantity'
+        });
+    }
+    
 })
 module.exports =router;
