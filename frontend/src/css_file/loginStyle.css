@@ -60,9 +60,9 @@ form.sign-in-form {
   z-index: 2;
 }
 
-.title {
+.head-title {
   font-size: 2.2rem;
-  color: #444;
+  color: #3e3e3e;
   margin-bottom: 10px;
 }
 
@@ -150,6 +150,7 @@ form.sign-in-form {
 .btn:hover {
   background-color: #4d84e2;
 }
+
 .panels-container {
   position: absolute;
   height: 100%;
@@ -197,6 +198,11 @@ form.sign-in-form {
 .right-panel {
   pointer-events: none;
   padding: 3rem 12% 2rem 17%;
+}
+
+.panel .content button {
+  position: relative;
+  left: 35%;
 }
 
 .panel .content {
@@ -275,6 +281,7 @@ form.sign-in-form {
     min-height: 800px;
     height: 100vh;
   }
+
   .signin-signup {
     width: 100%;
     top: 95%;
@@ -298,6 +305,11 @@ form.sign-in-form {
     align-items: center;
     padding: 2.5rem 8%;
     grid-column: 1 / 2;
+  }
+
+  .panel .content button {
+    position: relative;
+    left: 33%;
   }
 
   .right-panel {
@@ -381,9 +393,11 @@ form.sign-in-form {
   .image {
     display: none;
   }
+
   .panel .content {
     padding: 0.5rem 1rem;
   }
+
   .container {
     padding: 1.5rem;
   }

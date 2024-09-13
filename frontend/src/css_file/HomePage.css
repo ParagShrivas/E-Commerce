@@ -2,8 +2,7 @@
   width: 1300px;
   height: 550px;
   position: relative;
-  /* Changed to relative for normal flow */
-  margin-top: 18em;
+  margin-top: 15em;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #7db1ec;

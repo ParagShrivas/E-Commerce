@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../css_file/HomePage.css";
 import Logo from './Logo';
 import Navbar from "./Navbar";
+import Product from "./product";
+import Footer from "./Footer";
 
 const HomePage = () => {
      const [rotate, setRotate] = useState(0);
@@ -121,6 +123,8 @@ const HomePage = () => {
                     </div>
                </div>
                <Logo />
+               <Product/>
+               <Footer/>
           </>
      );
 };

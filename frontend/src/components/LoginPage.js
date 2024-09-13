@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from './Alert';
 import Navbar from './Navbar';
 import '../css_file/Loader.css';
+import Footer from './Footer';
 
 export default function LoginPage(props) {
      const [SignUpMode, SetClass] = useState('');
@@ -152,7 +153,7 @@ export default function LoginPage(props) {
                     <div className="forms-container">
                          <div className="signin-signup">
                               <form onSubmit={Login} className="sign-in-form">
-                                   <h2 className="title">Sign in</h2>
+                                   <h2 className="head-title">Sign in</h2>
                                    <div className="input-field">
                                         <i className="fas fa-user"></i>
                                         <input
@@ -188,7 +189,7 @@ export default function LoginPage(props) {
                               </form>
 
                               <form onSubmit={SignUp} className="sign-up-form">
-                                   <h2 className="title">Sign up</h2>
+                                   <h2 className="head-title">Sign up</h2>
                                    <div className="input-field">
                                         <i className="fas fa-user"></i>
                                         <input
@@ -304,6 +305,7 @@ export default function LoginPage(props) {
                          </div>
                     )}
                </div>
+               <Footer />
           </>
      );
 }

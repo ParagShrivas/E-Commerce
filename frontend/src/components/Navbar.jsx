@@ -4,48 +4,163 @@ import '../css_file/navbar.css';
 export default function Navbar() {
 
      return (
-          <div className="navbar">
-               <nav className="nav">
-                    <div className="logo">
-                         <i className='bx bxs-shopping-bag'></i>
-                         <strong><span>Dream mall</span></strong>
+          <>
+               <div className="navbar">
+                    <nav className="nav">
+                         <div className="brand-logo">
+                              <i className='bx bxs-shopping-bag'></i>
+                              <strong><span>Dream mall</span></strong>
+                         </div>
+
+                         <div className="searchbar">
+                              <div className="search">
+                                   <input type="text" placeholder="Search" />
+                                   <button className="search-btn">
+                                        <i className='bx bx-search'></i>
+                                   </button>
+                              </div>
+
+
+                         </div>
+
+                         <div className="menu-toggle">
+                              <i className='bx bx-menu'></i>
+                         </div>
+
+                         <div className="icons">
+                              <div className="icon search-icon">
+                                   <i className='bx bx-search'></i>
+                              </div>
+
+                              <div className="icon">
+                                   <i class="fa-regular fa-user"></i>
+                                   <span>User</span>
+                              </div>
+
+                              <div className="icon">
+                                   <i className='fa-regular fa-heart'></i>
+                                   <span>Wishlist</span>
+                              </div>
+
+                              <div className="icon">
+                                   <i className='fas fa-shopping-cart'></i>
+                                   <span>My Cart</span>
+                              </div>
+                         </div>
+                    </nav>
+               </div>
+               <div className='down-menu'>
+                    <li className='home-menu'>
+                         HOME
+
+                         <ul className='options'>
+                              <li className='option'>
+                                   <img src="img/chair.png" alt="" width={'40px'} />
+                                   Chair
+                              </li>
+
+                              <li className='option'>
+                                   <i class="fa-solid fa-couch"></i>
+                                   Sofa
+                              </li>
+
+                              <li className='option'>
+                                   <img src="img/bed.png" alt="" width={'45px'} />
+                                   Bed
+                              </li>
+                         </ul>
+
+                    </li>
+                    <li><div class="category-menu">
+                         <div class="select-btn">
+                              <span class="sBtn-text">Categories</span>
+                         </div>
+                         <ul class="options">
+                              <li class="option">
+                                   <i class="fa-solid fa-headphones-simple" style={{ color: "#171515;" }}></i>
+                                   <span class="option-text">Electronics</span>
+                              </li>
+                              <li class="option">
+                                   <i class="fa-solid fa-shirt" style={{ color: "#E1306C;" }}></i>
+                                   <span class="option-text">Fashion</span>
+                              </li>
+                              <li class="option">
+                                   <img src="img/shoes.png" alt="" width={'40px'} style={{ color: "#1DA1F2;" }} />
+                                   <span class="option-text">Shoes</span>
+                              </li>
+                              <li class="option">
+                                   <i class="fa-solid fa-motorcycle" style={{ color: "#0E76A8;" }}></i>
+                                   <span class="option-text">Toys</span>
+                              </li>
+                              <li class="option">
+                                   <i class="fa-solid fa-couch" style={{ color: "#1DA1F2;" }}></i>
+                                   <span class="option-text">Furniture</span>
+                              </li>
+                         </ul>
                     </div>
+                    </li>
+                    <li className='men-menu'>
+                         MEN'S
+                         <ul className='options'>
+                              <li className='option'>
+                                   <i class="fa-solid fa-shirt" style={{ color: "#E1306C;" }}></i>
+                                   T-shirt
+                              </li>
 
-                    <div className="searchbar">
-                         <div className="search">
-                              <input type="text" placeholder="Search" />
-                         </div>
+                              <li className='option'>
+                                   <img src="img/jeans.png" alt="" width={'45px'} />
+                                   Jeans
+                              </li>
 
-                         <button className="search-btn">
-                              <i className='bx bx-search'></i>
-                         </button>
-                    </div>
+                              <li className='option'>
+                                   <img src="img/shoes.png" alt="" width={'45px'} style={{ color: "#1DA1F2;" }} />
+                                   Shoes
+                              </li>
+                         </ul>
+                    </li>
+                    <li className='women-menu'>WOMEN'S
+                         <ul className='options'>
+                              <li className='option'>
+                                   <img src="img/dress.png" alt="" width={'40px'} />
+                                   Dress
+                              </li>
 
-                    <div className="menu-toggle">
-                         <i className='bx bx-menu'></i>
-                    </div>
+                              <li className='option'>
+                                   <img src="img/meakup.png" alt="" width={'40px'} />
+                                   Meakup Kit
+                              </li>
 
-                    <div className="icons">
-                         <div className="icon search-icon">
-                              <i className='bx bx-search'></i>
-                         </div>
+                              <li className='option'>
+                                   <img src="img/earing.png" alt="" width={'45px'} />
+                                   Jewellery
+                              </li>
+                         </ul>
+                    </li>
+                    <li className='electronic-menu'>ELECTRONICS
+                         <ul className='options'>
+                              <li className='option'>
+                                   <i class="fa-solid fa-mobile-screen-button"></i>
+                                   Mobile
+                              </li>
 
-                         <div className="icon">
-                              <i className='bx bxs-user'></i>
-                              <span>User</span>
-                         </div>
+                              <li className='option'>
+                                   <i class="fa-solid fa-laptop"></i>
+                                   Laptop
+                              </li>
 
-                         <div className="icon">
-                              <i className='bx bxs-heart'></i>
-                              <span>Wishlist</span>
-                         </div>
-
-                         <div className="icon">
-                              <i className='bx bxs-cart-alt'></i>
-                              <span>My Cart</span>
-                         </div>
-                    </div>
-               </nav>
-          </div>
+                              <li className='option'>
+                                   <i class="fa-solid fa-tv"></i>
+                                   Smart TV
+                              </li>
+                              <li className='option'>
+                                   <i class="fa-solid fa-headphones-simple"></i>
+                                   Music Devices
+                              </li>
+                         </ul>
+                    </li>
+                    <li>SPORTS</li>
+                    <li>OFFER</li>
+               </div >
+          </>
      );
 }
