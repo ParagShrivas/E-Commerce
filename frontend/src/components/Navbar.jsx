@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../css_file/navbar.css';
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export default function Navbar() {
+     useEffect(() => {
+          AOS.init({
+               duration: 1000
+          })
+     }, [])
 
      return (
           <>
@@ -52,7 +59,6 @@ export default function Navbar() {
                <div className='down-menu'>
                     <li className='home-menu'>
                          HOME
-
                          <ul className='options'>
                               <li className='option'>
                                    <img src="img/chair.png" alt="" width={'40px'} />

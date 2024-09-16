@@ -68,16 +68,16 @@ body {
 }
 
 .search {
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: transparent;
     border: #127FFF 2px solid;
-    padding: 7.5px 24px;
+    padding: 7.5px 20px;
     transition: all 0.3s ease;
 }
 
 .searchbar input {
     border: none;
-    width: 300px;
+    width: 500px;
     outline: none;
     font-size: 16px;
     color: #0a0a0a;
@@ -91,8 +91,8 @@ body {
 }
 
 .search-btn {
-    align-items: center;
-    justify-content: center;
+    display: inline;
+    align-items: right;
     background-color: transparent;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -100,7 +100,7 @@ body {
 
 .search-btn i {
     color: #5961f0;
-    font-size: 22px;
+    font-size: 20px;
     transition: transform 0.1s ease;
 }
 

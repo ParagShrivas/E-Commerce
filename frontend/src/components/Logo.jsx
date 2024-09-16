@@ -1,9 +1,17 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import '../css_file/logos.css'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export default function Logo() {
+     useEffect(() => {
+          AOS.init({
+               duration:1000
+          })
+     }, [])
+
      return (
-          <div className="brand-logos-container">
+          <div className="brand-logos-container" data-aos="zoom-out">
                <h1>Top Brands</h1><br />
                <img src="img/brand/1.png" alt="Brand Logo 1" className="brand-logos" />
                <img src="img/brand/2.png" alt="Brand Logo 2" className="brand-logos" />

@@ -8,7 +8,6 @@
   background-color: #7db1ec;
   border-radius: 40px;
   z-index: 2;
-  /* Ensure the slider stays on top */
 }
 
 .background-rotate {
@@ -97,7 +96,7 @@
   transform: translate(100%, 0);
 }
 
-.home-content img {
+.home-content .img {
   align-items: center;
   width: 530px;
   height: 450px;
@@ -108,6 +107,7 @@
 .home-content .text {
   text-align: left;
   color: #fff;
+  text-shadow: 1px 1px 15px black;
   display: grid;
   margin: 20% 0% 0% 38%;
   font-family: system-ui;
@@ -127,7 +127,6 @@
   margin: 10px 0;
   cursor: pointer;
   transition: 0.5s;
-  /* left: 25%; */
 }
 
 .home-content table tr:nth-child(2n + 1) td {
@@ -150,18 +149,18 @@
   transform: rotate(-100deg);
 }
 
-.item .images img {
+.item .images .img {
   position: absolute;
   width: 140px;
   transition: 2s;
 }
 
-.item .images .item_img:nth-child(2) img {
+.item .images .item_img:nth-child(2) .img {
   width: 250px;
   position: relative;
 }
 
-.item .images .item_img:nth-child(3) img {
+.item .images .item_img:nth-child(3) .img {
   width: 100px;
   filter: blur(5px);
 }
@@ -204,15 +203,15 @@
   transform: rotate(200deg);
 }
 
-.item.active .images .item_img:nth-child(1) img {
+.item.active .images .item_img:nth-child(1) .img {
   transform: rotate(-108deg);
 }
 
-.item.active .images .item_img:nth-child(2) img {
+.item.active .images .item_img:nth-child(2) .img {
   transform: rotate(-188deg);
 }
 
-.item.active .images .item_img:nth-child(3) img {
+.item.active .images .item_img:nth-child(3) .img {
   transform: rotate(-108deg) translate(-130px);
 }
 

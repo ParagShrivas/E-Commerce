@@ -102,13 +102,13 @@ export default function Footer() {
                                         <div className="icon-box">
                                              <ion-icon name="call-outline" />
                                         </div>
-                                        <a href="tel:+607936-8058" className="footer-nav-link">(607) 936-8058</a>
+                                        <a href="tel:1234567890" className="footer-nav-link">1234567890</a>
                                    </li>
                                    <li className="footer-nav-item flex">
                                         <div className="icon-box">
                                              <ion-icon name="mail-outline" />
                                         </div>
-                                        <a href="mailto:example@gmail.com" className="footer-nav-link">example@gmail.com</a>
+                                        <a href="gmail:example@gmail.com" className="footer-nav-link">dream_mall@gmail.com</a>
                                    </li>
                               </ul>
                               <ul className="footer-nav-list">

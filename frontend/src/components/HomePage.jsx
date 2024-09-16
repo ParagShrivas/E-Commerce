@@ -43,7 +43,7 @@ const HomePage = () => {
 
      useEffect(() => {
           activeItem();
-     }, [rotate]);
+     });
 
      const activeItem = () => {
           const rotateElement = document.querySelector('.bg-rotate');
@@ -92,14 +92,14 @@ const HomePage = () => {
                               <div key={index} className={`item ${index === active ? 'active' : ''} ${index === hide ? 'hide' : ''}`}>
                                    <div className="images">
                                         <div className="item_img">
-                                             <img src={item.src.replace(/\d+/, index + 2)} alt="" />
+                                             <img src={item.src.replace(/\d+/, index + 2)} alt="" className='img'/>
                                         </div>
                                         <div className="item_img">
-                                             <img src={item.src} alt="" />
+                                             <img src={item.src} alt="" className='img'/>
                                         </div>
                                    </div>
                                    <div className="home-content">
-                                        <img src={item.src.replace(/\d+/, index + 1)} alt="" />
+                                        <img src={item.src.replace(/\d+/, index + 1)} alt="" className='img'/>
                                         <div className="text">
                                              <h1>{item.title}</h1>
                                              <h3>{item.price}</h3>
