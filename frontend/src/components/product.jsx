@@ -116,9 +116,7 @@ export default function Product() {
                               </div>
                          </div>
                     </div>
-                    {/*
-      - PRODUCT
-    */}
+                    {/*- PRODUCT*/}
                     <div className="home-container">
                          <h3 style={{ color: '#545352' }}>Featured Products</h3><br />
                          <div className="featured-products" data-aos="fade-up">
@@ -129,7 +127,7 @@ export default function Product() {
                                              <i class='bx bx-heart'></i>
                                         </div>
                                         <div class="main-images">
-                                             <img id="blue" class="img blue active" src="img/blue.png" alt="shoes" style={{transform: 'rotate(18deg)'}}/>
+                                             <img id="blue" class="img blue active" src="img/blue.png" alt="shoes" style={{ transform: 'rotate(18deg)' }} />
                                         </div>
                                         <div class="product-details">
                                              <span class="product_name">ADDIDAS GAZE ZX</span>
@@ -240,7 +238,7 @@ export default function Product() {
                                         <i class='bx bx-heart'></i>
                                    </div>
                                    <div class="main-images">
-                                        <img class="img active" src="images/watch.jpg" alt="watch" style={{weight:'50px',height:'160px',padding:'15px'}}/>
+                                        <img class="img active" src="images/watch.jpg" alt="watch" style={{ weight: '50px', height: '160px', padding: '15px' }} />
                                    </div>
                                    <div class="product-details">
                                         <span class="product_name">LUXURY WATCH FOR MEN</span>
@@ -351,7 +349,7 @@ export default function Product() {
                                         <i class='bx bx-heart'></i>
                                    </div>
                                    <div class="main-images">
-                                        <img class="img active" src="images/heals.jpg" alt="shoes" style={{padding:'30px',width:'190px'}}/>
+                                        <img class="img active" src="images/heals.jpg" alt="shoes" style={{ padding: '30px', width: '190px' }} />
                                    </div>
                                    <div class="product-details">
                                         <span class="product_name">LOW PUMP HEALS</span>
@@ -388,7 +386,7 @@ export default function Product() {
                                         <i class='bx bx-heart'></i>
                                    </div>
                                    <div class="main-images">
-                                        <img class="img active" src="images/hoodie.jpg" alt="shoes" style={{padding:'35px',height:'190px',marginTop:'-10px'}}/>
+                                        <img class="img active" src="images/hoodie.jpg" alt="shoes" style={{ padding: '35px', height: '190px', marginTop: '-10px' }} />
                                    </div>
                                    <div class="product-details">
                                         <span class="product_name">MEN'S FORMAL SHOES</span>

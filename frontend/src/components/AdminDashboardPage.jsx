@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../css_file/dashboard.css'
 import SideNav from './SideNav'
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, BarElement, LineElement, Title, Tooltip, Legend, Colors } from 'chart.js';
 
@@ -51,27 +53,33 @@ export default function AdminDashboardPage() {
           maintainAspectRatio: false,  // Allow the chart to adjust based on container size
      };
 
+     useEffect(() => {
+          AOS.init({
+               duration: 1000
+          })
+     }, [])
+
      return (
           <>
                <div className='dashboard-container'>
                     <SideNav />
                     <div className="main">
-                         <div className="main-top">
+                         <div className="main-top" data-aos="fade-down">
                               <h2>Admin Dashboard</h2>
-                              <input type="date" name="" id="" />
+                              <input type="date" name="" id="date" />
                          </div>
                          <div className="main-skills">
-                              <div className="card">
+                              <div className="card" data-aos="fade-right" data-aos-delay="100">
                                    <i className="fas fa-users" ></i>
                                    <h3>Customers</h3>
                                    <p>1500</p>
                               </div>
-                              <div className="card">
+                              <div className="card" data-aos="fade-right" data-aos-delay="200">
                                    <i className="fas fa-money-bill-wave"></i>
                                    <h3>Income</h3>
                                    <p>₹89,2000</p>
                               </div>
-                              <div className="card">
+                              <div className="card" data-aos="fade-right" data-aos-delay="300">
                                    <i className="fa-solid fa-boxes-packing"></i>
                                    <h3>Product Sold</h3>
                                    <p>1,00,000</p>
@@ -80,9 +88,9 @@ export default function AdminDashboardPage() {
                     </div>
                </div>
                <div className="table">
-                    <h2>Recent Orders</h2>
-                    <strong><a href="">SEE ALL</a></strong>
-                    <table>
+                    <h2 data-aos="fade-right" data-aos-delay="100">Recent Orders</h2>
+                    <strong><a href="" data-aos="fade-right" data-aos-delay="100">SEE ALL</a></strong>
+                    <table data-aos="fade-right" data-aos-delay="100">
                          <tr>
                               <th>Product Name</th>
                               <th>Order ID</th>
@@ -114,23 +122,23 @@ export default function AdminDashboardPage() {
                </div>
                <div className="recent-updates">
                     <p>Recent updates</p>
-                    <div className="card">
+                    <div className="card" data-aos="fade-down" data-aos-delay="100">
                          <i className="fa-solid fa-bell"></i>
                          <span>New Orders</span>
                          <span style={{ 'margin-left': '110px' }}>+50</span>
-                    </div><br />
-                    <div className="card">
+                    </div>
+                    <div className="card" data-aos="fade-down" data-aos-delay="200">
                          <i className="fa-solid fa-bell"></i>
                          <span>New Customers</span>
-                         <span style={{ 'margin-left': '80px' }}>+15</span>
-                    </div><br />
-                    <div className="card">
+                         <span style={{ 'margin-left': '70px' }}>+15</span>
+                    </div>
+                    <div className="card" data-aos="fade-down" data-aos-delay="300">
                          <i className="fa-solid fa-bell"></i>
                          <span>Order Delivered</span>
-                         <span style={{ 'margin-left': '80px' }}>+20</span>
+                         <span style={{ 'margin-left': '70px' }}>+20</span>
                     </div>
                </div>
-               <div className='graph'>
+               <div className='graph' data-aos="fade-up" data-aos-delay="100">
                     <Line data={data} options={options} />
                     <Bar className='bar' data={data2} options={options2} />
                </div>

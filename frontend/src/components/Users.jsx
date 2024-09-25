@@ -4,6 +4,8 @@ import Dash_Alert from './Dash_Alert'
 import DataTable from 'react-data-table-component';
 import '../css_file/Product_table.css';
 import '../css_file/confirm.css';
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export default function Users() {
      const [users, setUsers] = useState([])
@@ -24,7 +26,7 @@ export default function Users() {
                          setUsers([]);
                     }
                })
-               .catch((error) => console.error('Error fetching products:', error));
+               .catch((error) => console.error('Error fetching users:', error));
      }, []);
 
      const handleDeleteClick = (user) => {
@@ -106,6 +108,11 @@ export default function Users() {
           setFilterSearch(result);
      }, [search, users]);
 
+     useEffect(() => {
+          AOS.init({
+               duration: 1000
+          })
+     }, [])
 
      return (
           <>
@@ -132,7 +139,7 @@ export default function Users() {
                               </div>
                          </div>
                     )}
-                    <div className="Datatable" style={{ width: '60em' }}>
+                    <div className="Datatable" style={{ width: '60em' }} data-aos="fade-down">
                          <h1>Users Data</h1><br />
                          <DataTable
                               pagination

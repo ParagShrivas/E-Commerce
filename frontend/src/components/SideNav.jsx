@@ -6,7 +6,7 @@ export default function SideNav() {
           <div className='dashboard-container'>
                <div className='dashboard-nav'>
                     <ul>
-                         <li><a href="#" className="logo">
+                         <li><a href="#" className="Brand-Logo">
                               <i className='bx bxs-shopping-bag'></i>
                               <span className="nav-item">Dream mall</span>
                          </a></li>

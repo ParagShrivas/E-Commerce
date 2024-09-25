@@ -1,0 +1,126 @@
+.profile {
+     display: flex;
+     justify-content: left;
+     align-items: center;
+     margin-left: 5%;
+     margin-bottom: 2%;
+     flex-wrap: wrap;
+}
+
+h2 {
+     margin-left: 5%;
+     padding: 5px;
+}
+
+.profile-option {
+     display: flex;
+     padding: 5px;
+     gap: 10px;
+     width: 100%;
+}
+
+a {
+     text-decoration: none;
+     border-radius: 8px;
+     color: inherit;
+     display: block;
+}
+
+.profile-option a:hover {
+     background-color: transparent;
+}
+
+.box {
+     background-color: #e1e5fb;
+     padding: 5px;
+     border-radius: 8px;
+     border: 2px solid #343434;
+     max-width: 255px;
+     text-wrap: wrap;
+}
+
+.order:hover,
+.security:hover,
+.name:hover,
+.address:hover,
+.payment:hover {
+     transform: scale(1.05);
+     transition: transform 0.3s ease;
+}
+
+.profile-details {
+     width: 100%;
+     gap: 10px;
+     margin-top: 1.5%;
+     align-items: center;
+     justify-content: left;
+}
+
+.profile-details p {
+     margin: 5px;
+     color: #111111;
+}
+
+.profile-details input {
+     background-color: #d4edfc;
+     height: 40px;
+     width: 350px;
+     color: #000;
+     border-radius: 8px;
+     border: 2px solid #343434;
+     padding: 5px;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+     .profile-option {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          border: 2px solid var(--cultured);
+          border-radius: var(--border-radius-md);
+          scroll-snap-align: start;
+          /* This can stay to define snapping point */
+     }
+
+     .box,
+     a {
+          width: 100%;
+     }
+
+     .profile {
+          display: flex;
+          align-items: center;
+          margin-left: 2%;
+          overflow-x: auto;
+          /* Horizontal scrolling */
+          cursor: pointer;
+          scroll-snap-type: none;
+          /* Removed snapping for smoother scrolling */
+          overscroll-behavior-inline: contain;
+     }
+
+     .has-scrollbar {
+          padding-bottom: 5px;
+     }
+
+     /* Custom scrollbar */
+     .has-scrollbar::-webkit-scrollbar {
+          width: 12px;
+          height: 12px;
+     }
+
+     .has-scrollbar::-webkit-scrollbar-thumb {
+          background: transparent;
+          border: 3px solid #fff;
+          border-radius: 20px;
+     }
+
+     .has-scrollbar:hover::-webkit-scrollbar-thumb {
+          background: hsl(0, 0%, 90%);
+     }
+
+     .has-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: hsl(0, 0%, 80%);
+     }
+}

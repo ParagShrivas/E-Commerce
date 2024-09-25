@@ -1,9 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../css_file/navbar.css';
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 export default function Navbar() {
+     const location = useLocation();
+     const email = localStorage.getItem('email');
+
+     const [name, setName] = useState('');
+
+     useEffect(() => {
+          const fetchUserName = async () => {
+               try {
+                    const response = await fetch(`http://localhost:1500/users/email/${email}`, {
+                         method: 'GET'
+                    });
+                    const res = await response.json();
+                    if (response.ok) {
+                         setName(res.fname);
+                    } else {
+                         console.error('Error fetching name:', res.message);
+                    }
+               } catch (error) {
+                    console.error('Error:', error);
+               }
+          };
+
+          if (email) {
+               fetchUserName();
+          }
+     }, [email]);
+
      useEffect(() => {
           AOS.init({
                duration: 1000
@@ -14,7 +42,7 @@ export default function Navbar() {
           <>
                <div className="navbar">
                     <nav className="nav">
-                         <div className="brand-logo">
+                         <div className="brand-Logo">
                               <i className='bx bxs-shopping-bag'></i>
                               <strong><span>Dream mall</span></strong>
                          </div>
@@ -26,10 +54,7 @@ export default function Navbar() {
                                         <i className='bx bx-search'></i>
                                    </button>
                               </div>
-
-
                          </div>
-
                          <div className="menu-toggle">
                               <i className='bx bx-menu'></i>
                          </div>
@@ -41,7 +66,7 @@ export default function Navbar() {
 
                               <div className="icon">
                                    <i class="fa-regular fa-user"></i>
-                                   <span>User</span>
+                                   <span>{name ? name : "Login"}</span>
                               </div>
 
                               <div className="icon">

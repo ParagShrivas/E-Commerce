@@ -24,7 +24,6 @@ async function SendMail(email) {
 
     // Create JWT token with the OTP, which expires in 5 minutes
     const token = jwt.sign({ otp }, process.env.JWT_SECRET, { expiresIn: '5m' });
-    // console.log(token);
 
     // Store the token associated with the email
     users[email] = { token };
@@ -47,6 +46,35 @@ async function SendMail(email) {
     });
 
 }
+
+//check authentication
+const checkAuth = (req, res, next) => {
+    const authHeader = req.headers['authorization']; // Correct casing for the Authorization header
+
+    if (!authHeader) {
+        return res.status(401).json({ message: 'Unauthorized, please log in.' });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided.' });
+    }
+
+    // Verify the token
+    jwt.verify(token, process.env.JWT_SECRET_LOGIN, (err, decoded) => {
+        if (err) {
+            return res.status(403).json({ message: 'Invalid token.' });
+        }
+
+        req.user = decoded;
+
+        next();
+    });
+};
+
+module.exports = checkAuth;
+
 // Login route
 router.post('/', async (req, res) => {
     const { email, password } = req.body;
@@ -134,13 +162,21 @@ router.post('/verify-otp', async (req, res) => {
         // Verify the JWT token and extract the OTP
         const decoded = jwt.verify(userToken, process.env.JWT_SECRET);
         if (decoded.otp == otp) {
-            return res.status(200).json({ message: 'OTP verified successfully' });
+            const loginToken = jwt.sign({ email }, process.env.JWT_SECRET_LOGIN, { expiresIn: '1h' })
+            users[email] = { loginToken };
+            const logToken = users[email]?.loginToken;
+            return res.status(200).json({ message: 'OTP verified successfully', logToken });
         } else {
             return res.status(401).json({ message: 'Invalid OTP' });
         }
     } catch (error) {
         console.error('Error during OTP verification:', error);
     }
+});
+
+router.get('/check-auth', checkAuth, (req, res) => {
+    // If we reach here, the token is valid
+    return res.status(200).json({ message: 'Token is valid' });
 });
 
 module.exports = router;

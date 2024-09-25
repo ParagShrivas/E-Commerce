@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import '../css_file/loginStyle.css';
 import '../css_file/otp.css';
 import { useNavigate } from 'react-router-dom';
@@ -6,8 +6,10 @@ import Alert from './Alert';
 import Navbar from './Navbar';
 import '../css_file/Loader.css';
 import Footer from './Footer';
+import CheckAuth from './CheckAuth';
 
-export default function LoginPage(props) {
+export default function LoginPage() {
+     CheckAuth();
      const [SignUpMode, SetClass] = useState('');
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
@@ -112,11 +114,6 @@ export default function LoginPage(props) {
           }
      };
 
-     useEffect(() => {
-          // Focus the first input on component mount
-          // inputRefs.current[0].focus();
-     }, []);
-
      const verifyOtp = async () => {
           const enteredOtp = otp.join('');
           try {
@@ -130,6 +127,8 @@ export default function LoginPage(props) {
 
                const res = await response.json();
                if (response.ok) {
+                    localStorage.setItem('token', res.logToken);
+                    localStorage.setItem('email', email);
                     showAlert(res.message);
                     setShowOTP(false);
                     setLoading(true);
