@@ -144,7 +144,7 @@ export default function Footer() {
                     </div>
                     <div className="footer-bottom">
                          <div className="home-container">
-                              <img src="./images/payment.png" alt="payment method" className="payment-img" />
+                              <img src="/images/payment.png" alt="payment method" className="payment-img" />
                               <p className="copyright">
                                    Copyright © <a href="#">Dream mall</a> all rights reserved.
                               </p>

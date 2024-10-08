@@ -15,28 +15,50 @@ h2 {
 .profile-option {
      display: flex;
      padding: 5px;
-     gap: 10px;
+     gap: 20px;
      width: 100%;
 }
 
-a {
+.profile-option button {
+     align-items: center;
+     background-color: #FCFCFD;
+     border-radius: 4px;
+     border-width: 0;
+     box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+     box-sizing: border-box;
+     color: #36395A;
+     cursor: pointer;
+     font-family: "JetBrains Mono", monospace;
+     height: 70px;
+     max-width: 355px;
+     justify-content: center;
+     overflow: hidden;
+     padding-left: 16px;
+     padding-right: 16px;
+     position: relative;
+     text-align: center;
      text-decoration: none;
-     border-radius: 8px;
-     color: inherit;
-     display: block;
+     transition: box-shadow .15s, transform .15s;
+     user-select: none;
+     -webkit-user-select: none;
+     touch-action: manipulation;
+     white-space: nowrap;
+     will-change: box-shadow, transform;
+     font-size: 15px;
 }
 
-.profile-option a:hover {
-     background-color: transparent;
+.profile-option button:focus {
+     box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
 
-.box {
-     background-color: #e1e5fb;
-     padding: 5px;
-     border-radius: 8px;
-     border: 2px solid #343434;
-     max-width: 255px;
-     text-wrap: wrap;
+.profile-option button:hover {
+     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+     transform: translateY(-2px);
+}
+
+.profile-option button:active {
+     box-shadow: #D6D6E7 0 3px 7px inset;
+     transform: translateY(2px);
 }
 
 .order:hover,
@@ -44,7 +66,7 @@ a {
 .name:hover,
 .address:hover,
 .payment:hover {
-     transform: scale(1.05);
+     transform: scale(1);
      transition: transform 0.3s ease;
 }
 
@@ -56,6 +78,15 @@ a {
      justify-content: left;
 }
 
+.profile-details i {
+     padding: 10px;
+     margin: 10px;
+     cursor: pointer;
+     background-color: transparent;
+     border: 2px solid #535353;
+     border-radius: 100%;
+}
+
 .profile-details p {
      margin: 5px;
      color: #111111;
@@ -63,14 +94,30 @@ a {
 
 .profile-details input {
      background-color: #d4edfc;
-     height: 40px;
-     width: 350px;
+     height: 50px;
+     font-size: 18px;
+     width: 60%;
      color: #000;
-     border-radius: 8px;
+     border-radius: 20px;
      border: 2px solid #343434;
-     padding: 5px;
+     padding: 10px;
 }
 
+.save-button {
+     display: flex;
+     position: relative;
+     left: 70%;
+     top: 10%;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background-color: #3376ea;
+     color: #fff;
+     border-radius: 10px;
+     width: 70px;
+     height: 50px;
+     padding: 20px;
+}
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {
      .profile-option {
@@ -83,6 +130,9 @@ a {
           /* This can stay to define snapping point */
      }
 
+     .save-button{
+          left: 40%;
+     }
      .box,
      a {
           width: 100%;

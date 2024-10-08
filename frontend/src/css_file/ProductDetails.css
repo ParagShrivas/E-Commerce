@@ -1,0 +1,135 @@
+/* Container for image and text (product details) */
+.product_page {
+     display: flex;
+     flex-direction: row;
+     align-items: left;
+     gap: 20px;
+     margin-left: 10%;
+     margin-right: 10%;
+     margin-top: 2%;
+     margin-bottom: 2%;
+}
+
+/* Styles for the image */
+.product_page img {
+     background-color: rgba(15, 17, 19, 0.067);
+     border: 2px solid #000;
+     border-radius: 20px;
+     width: 100%;
+     max-width: 500px;
+     height: auto;
+     padding: 20px;
+     object-fit: contain;
+     display: block;
+     margin: 0 auto;
+}
+
+
+/* Styles for the product details (text) */
+.product_details {
+     position: relative;
+     flex: 1;
+     padding-left: 20px;
+     font-size: 20px;
+}
+
+.price {
+     color: #3d444f;
+}
+
+.quantity-control {
+     display: flex;
+     align-items: center;
+     justify-content: left;
+     gap: 10px;
+     margin: 20px 0;
+}
+
+.quantity-control input {
+     width: 7%;
+     font-size: 15px;
+     border: 2px solid #007BFF;
+     padding: 5px;
+     text-align: center;
+     border-radius: 10px;
+}
+
+.quantity-btn {
+     background-color: #007BFF;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     padding: 5px 10px;
+     font-size: 15px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+     background-color: #0056b3;
+}
+
+.quantity-input {
+     width: 60px;
+     text-align: left;
+     font-size: 18px;
+     padding: 5px;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+}
+
+.quantity-input:focus {
+     outline: none;
+     border-color: #007BFF;
+     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+.product_details .button {
+     position: relative;
+     height: 40px;
+     width: 100%;
+     border-radius: 25px;
+     margin-top: 10%;
+     overflow: hidden;
+}
+
+.product_details .button .button-layer {
+     position: absolute;
+     height: 100%;
+     width: 300%;
+     left: -100%;
+     background-image: linear-gradient(135deg, #9708CC, #43CBFF, #9708CC, #43CBFF);
+     transition: all 0.4s ease;
+     border-radius: 25PX;
+}
+
+.product_details .button:hover .button-layer {
+     left: 0;
+}
+
+.product_details .button button {
+     position: relative;
+     height: 100%;
+     width: 100%;
+     background: none;
+     outline: none;
+     border: none;
+     font-size: 15px;
+     font-weight: 600;
+     letter-spacing: 1px;
+     color: #fff;
+}
+
+/* Responsive Layout for small screens */
+@media (max-width: 768px) {
+     .product_page {
+          flex-direction: column;
+          align-items: flex-start;
+     }
+
+     .product_page img {
+          margin-left: 0;
+          width: 100%;
+     }
+}

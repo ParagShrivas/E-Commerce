@@ -12,6 +12,7 @@ const CheckAuth = () => {
                     // Redirect to login if no token found in local storage
                     if (!token) {
                          console.log('No token found, redirecting to login.');
+                         localStorage.removeItem('email');
                          navigate('/login');
                          return;
                     }
@@ -24,6 +25,7 @@ const CheckAuth = () => {
                     // If the token is invalid or the request fails, redirect to login
                     if (!response.ok) {
                          console.log('Token invalid or expired, redirecting to login.');
+                         localStorage.removeItem('email');
                          navigate('/login');
                     } else {
                          console.log('Token valid, proceeding.');

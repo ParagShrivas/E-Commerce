@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import '../css_file/navbar.css';
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -64,20 +64,26 @@ export default function Navbar() {
                                    <i className='bx bx-search'></i>
                               </div>
 
-                              <div className="icon">
-                                   <i class="fa-regular fa-user"></i>
-                                   <span>{name ? name : "Login"}</span>
-                              </div>
+                              <Link to='/user/profile' className='Link'>
+                                   <div className="icon">
+                                        <i class="fa-regular fa-user"></i>
+                                        <span>{name ? name : "Login"}</span>
+                                   </div>
+                              </Link>
 
-                              <div className="icon">
-                                   <i className='fa-regular fa-heart'></i>
-                                   <span>Wishlist</span>
-                              </div>
+                              <Link to='/user/wishlist' className='Link'>
+                                   <div className="icon">
+                                        <i className='fa-regular fa-heart'></i>
+                                        <span>Wishlist</span>
+                                   </div>
+                              </Link>
 
-                              <div className="icon">
-                                   <i className='fas fa-shopping-cart'></i>
-                                   <span>My Cart</span>
-                              </div>
+                              <Link to='/' className='Link'>
+                                   <div className="icon">
+                                        <i className='fas fa-shopping-cart'></i>
+                                        <span>My Cart</span>
+                                   </div>
+                              </Link>
                          </div>
                     </nav>
                </div>
@@ -86,7 +92,7 @@ export default function Navbar() {
                          HOME
                          <ul className='options'>
                               <li className='option'>
-                                   <img src="img/chair.png" alt="" width={'40px'} />
+                                   <img src="/img/chair.png" alt="" width={'40px'} />
                                    Chair
                               </li>
 
@@ -96,7 +102,7 @@ export default function Navbar() {
                               </li>
 
                               <li className='option'>
-                                   <img src="img/bed.png" alt="" width={'45px'} />
+                                   <img src="/img/bed.png" alt="" width={'45px'} />
                                    Bed
                               </li>
                          </ul>
@@ -116,7 +122,7 @@ export default function Navbar() {
                                    <span class="option-text">Fashion</span>
                               </li>
                               <li class="option">
-                                   <img src="img/shoes.png" alt="" width={'40px'} style={{ color: "#1DA1F2;" }} />
+                                   <img src="/img/shoes.png" alt="" width={'40px'} style={{ color: "#1DA1F2;" }} />
                                    <span class="option-text">Shoes</span>
                               </li>
                               <li class="option">
@@ -139,12 +145,12 @@ export default function Navbar() {
                               </li>
 
                               <li className='option'>
-                                   <img src="img/jeans.png" alt="" width={'45px'} />
+                                   <img src="/img/jeans.png" alt="" width={'45px'} />
                                    Jeans
                               </li>
 
                               <li className='option'>
-                                   <img src="img/shoes.png" alt="" width={'45px'} style={{ color: "#1DA1F2;" }} />
+                                   <img src="/img/shoes.png" alt="" width={'45px'} style={{ color: "#1DA1F2;" }} />
                                    Shoes
                               </li>
                          </ul>
@@ -152,17 +158,17 @@ export default function Navbar() {
                     <li className='women-menu'>WOMEN'S
                          <ul className='options'>
                               <li className='option'>
-                                   <img src="img/dress.png" alt="" width={'40px'} />
+                                   <img src="/img/dress.png" alt="" width={'40px'} />
                                    Dress
                               </li>
 
                               <li className='option'>
-                                   <img src="img/meakup.png" alt="" width={'40px'} />
+                                   <img src="/img/meakup.png" alt="" width={'40px'} />
                                    Meakup Kit
                               </li>
 
                               <li className='option'>
-                                   <img src="img/earing.png" alt="" width={'45px'} />
+                                   <img src="/img/earing.png" alt="" width={'45px'} />
                                    Jewellery
                               </li>
                          </ul>

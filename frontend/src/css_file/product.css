@@ -345,7 +345,6 @@ body::-webkit-scrollbar-thumb:hover {
      position: absolute;
      height: 160px;
      width: 160px;
-     object-fit: cover;
      left: 12px;
      top: -40px;
      z-index: -1;
@@ -359,18 +358,21 @@ body::-webkit-scrollbar-thumb:hover {
 
 .product-card .product-details .product_name {
      font-size: 15px;
+     padding-top: 10px;
      font-weight: 500;
      color: #161616;
 }
 
 .product-card .product-details p {
      font-size: 10px;
+     padding-top: 5px;
      font-weight: 400;
      color: #333;
      text-align: justify;
 }
 
 .product-card .product-details .stars i {
+     padding-top: 5px;
      margin: 0 -1px;
      color: #333;
 }
@@ -456,7 +458,7 @@ body::-webkit-scrollbar-thumb:hover {
      height: 40px;
      width: 100%;
      border-radius: 25px;
-     margin-top: 30px;
+     margin-top: 18%;
      overflow: hidden;
 }
 
@@ -494,13 +496,14 @@ body::-webkit-scrollbar-thumb:hover {
      background: #fee6eb;
 }
 
-.deal-day{
+.deal-day {
      display: flex;
      flex-wrap: wrap;
      gap: 30px;
      justify-content: center;
      align-items: center;
 }
+
 .deal-container {
      display: flex;
      max-width: 630px;
@@ -956,18 +959,6 @@ footer {
 
      }
 
-
-
-     /**
-      * #BASE 
-      */
-
-     html {
-          font-size: 17px;
-     }
-
-
-
      /**
       * #REUSED STYLE 
       */
@@ -976,8 +967,6 @@ footer {
           max-width: 750px;
           margin: auto;
      }
-
-
 
      /**
       * #MODAL 
@@ -999,29 +988,10 @@ footer {
      }
 
      /**
-      * #HEADER 
-      */
-
-     .header-main .home-container {
-          gap: 80px;
-     }
-
-     /**
-      * #BANNER 
-      */
-
-     .slider-item {
-          aspect-ratio: auto;
-          height: 350px;
-     }
-
-     /**
       * #CATEGORY 
       */
 
-     .category-img-box {
-          padding: 20px;
-     }
+
 
      /**
       * #FOOTER 
@@ -1059,23 +1029,11 @@ footer {
 }
 
 
-
-
-
 /**
     * responsive larger than 1024px screen
     */
 
 @media (min-width: 1024px) {
-
-     /**
-      * #CATEGORY 
-      */
-
-     .category-item {
-          min-width: -webkit-calc(33.33% - 20px);
-          min-width: calc(33.33% - 20px);
-     }
 
      .category-img-box {
           padding: 10px;
@@ -1121,6 +1079,10 @@ footer {
     */
 
 @media (min-width: 1200px) {
+
+     .home-container {
+          max-width: 1150px;
+     }
 
      /**
       * #CATEGORY

@@ -162,7 +162,7 @@ router.post('/verify-otp', async (req, res) => {
         // Verify the JWT token and extract the OTP
         const decoded = jwt.verify(userToken, process.env.JWT_SECRET);
         if (decoded.otp == otp) {
-            const loginToken = jwt.sign({ email }, process.env.JWT_SECRET_LOGIN, { expiresIn: '1h' })
+            const loginToken = jwt.sign({ email }, process.env.JWT_SECRET_LOGIN, { expiresIn: '48h' })
             users[email] = { loginToken };
             const logToken = users[email]?.loginToken;
             return res.status(200).json({ message: 'OTP verified successfully', logToken });
@@ -177,6 +177,59 @@ router.post('/verify-otp', async (req, res) => {
 router.get('/check-auth', checkAuth, (req, res) => {
     // If we reach here, the token is valid
     return res.status(200).json({ message: 'Token is valid' });
+});
+
+//change password
+router.post('/change_password', async (req, res) => {
+    const { email, CurrentPassword, NewPassword, NewPassword2 } = req.body;
+
+    // Validate input fields
+    if (!CurrentPassword || !NewPassword || !NewPassword2) {
+        return res.status(400).json({ message: 'Please enter all fields' });
+    }
+
+    if (NewPassword.length < 6) {
+        return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+    }
+
+    if (NewPassword !== NewPassword2) {
+        return res.status(400).json({ message: 'Passwords do not match' });
+    }
+
+    try {
+        // Fetch the user's stored password
+        const data = await db.query('SELECT password FROM users WHERE email = $1', [email]);
+
+        // Check if the user exists
+        if (data.rows.length === 0) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const storedPassword = data.rows[0].password;
+
+        // Compare the provided password with the stored password
+        const passwordMatch = await bcrypt.compare(CurrentPassword, storedPassword);
+        if (!passwordMatch) {
+            return res.status(401).json({ message: 'Invalid current password' });
+        }
+
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(NewPassword, 10);
+
+        // Update the password in the database
+        await db.query(
+            `UPDATE users
+            SET password = $1
+            WHERE email = $2`,
+            [hashedPassword, email]
+        );
+
+        return res.status(200).json({ message: 'Password has been changed successfully' });
+
+    } catch (error) {
+        console.error('Error during password change:', error); // Log the error for debugging
+        return res.status(500).json({ message: 'Error during password change' });
+    }
 });
 
 module.exports = router;

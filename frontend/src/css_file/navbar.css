@@ -326,6 +326,15 @@ body {
     display: block;
 }
 
+.Link {
+    width: 70px;
+    margin-left: -25px;
+}
+
+.Link:hover {
+    background-color: transparent;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 845px) {
     .searchbar input {

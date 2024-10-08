@@ -1,9 +1,83 @@
-import React, { useEffect } from 'react'
-import '../css_file/product.css'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../css_file/product.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Product() {
+
+     const [products, setProducts] = useState([]);
+     const [likedProducts, setLikedProducts] = useState({});
+     const email = localStorage.getItem('email');
+
+     useEffect(() => {
+          const fetchWishlist = async () => {
+               try {
+                    const response = await fetch(`http://localhost:1500/wishlist/userLike/${email}`);
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                         const likedProductsMap = {};
+                         data.forEach(product => {
+                              likedProductsMap[product.product_id] = true;
+                         });
+                         setLikedProducts(likedProductsMap);
+                    } else {
+                         console.error('Expected an array but got:', data);
+                    }
+               } catch (error) {
+                    console.error('Error fetching products:', error);
+               }
+          };
+
+          fetchWishlist();
+     }, [email]);
+
+     const toggleLike = (product_id) => {
+          setLikedProducts((prev) => ({
+               ...prev,
+               [product_id]: !prev[product_id],
+          }));
+
+          const isLiked = !likedProducts[product_id];
+          const wishlist = async () => {
+               try {
+                    const response = await fetch(`http://localhost:1500/wishlist/${email}/${product_id}`, {
+                         method: 'POST',
+                         body: JSON.stringify({ liked: isLiked }), // Include the liked status if necessary
+                         headers: {
+                              'Content-Type': 'application/json',
+                         },
+                    });
+                    if (!response.ok) {
+                         console.error('Error updating wishlist:', response.statusText);
+                    }
+               } catch (error) {
+                    console.error('Error fetching products:', error);
+               }
+          };
+
+          wishlist();
+     };
+
+
+     useEffect(() => {
+          const fetchProducts = async () => {
+               try {
+                    const response = await fetch('http://localhost:1500/products');
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                         setProducts(data);
+                    } else {
+                         console.error('Expected an array but got:', data);
+                    }
+               } catch (error) {
+                    console.error('Error fetching products:', error);
+               }
+          };
+
+          fetchProducts();
+     }, []);
+
      useEffect(() => {
           AOS.init({
                duration: 1000
@@ -118,305 +192,54 @@ export default function Product() {
                     </div>
                     {/*- PRODUCT*/}
                     <div className="home-container">
-                         <h3 style={{ color: '#545352' }}>Featured Products</h3><br />
+                         <h3 style={{ color: '#545352' }}>Featured Products</h3>
+                         <br />
                          <div className="featured-products" data-aos="fade-up">
-                              <a href="/">
-                                   <div class="product-card">
-                                        <div class="logo-cart">
-                                             <img src="images/Logo.png" alt="logo" className='img' />
-                                             <i class='bx bx-heart'></i>
-                                        </div>
-                                        <div class="main-images">
-                                             <img id="blue" class="img blue active" src="img/blue.png" alt="shoes" style={{ transform: 'rotate(18deg)' }} />
-                                        </div>
-                                        <div class="product-details">
-                                             <span class="product_name">ADDIDAS GAZE ZX</span>
-                                             <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                             <div class="stars">
-                                                  <i class='bx bxs-star' ></i>
-                                                  <i class='bx bxs-star' ></i>
-                                                  <i class='bx bxs-star' ></i>
-                                                  <i class='bx bxs-star' ></i>
-                                                  <i class='bx bx-star' ></i>
+                              {products.map((product) => (
+                                   <Link to={`/product/detail/${product.product_id}/${encodeURIComponent(product.product_name)}`} target='_blank'>
+                                        <div className="product-card" key={product.id}>
+                                             <div className="logo-cart">
+                                                  <img src="images/Logo.png" alt="logo" className='img' />
+                                                  <i
+                                                       className={likedProducts[product.product_id] ? 'bx bxs-heart' : 'bx bx-heart'}
+                                                       onClick={() => toggleLike(product.product_id)}
+                                                       style={{ color: likedProducts[product.product_id] ? 'red' : 'black' }} // Change color based on liked status
+                                                  ></i>
                                              </div>
-                                        </div>
-                                        <div class="color-price">
-                                             <div class="color-option">
-                                                  <span class="color">Colour:</span>
-                                                  <div class="circles">
-                                                       <span class="color-circle blue active" id="blue"></span>
-                                                       <span class="color-circle pink " id="pink"></span>
-                                                       <span class="color-circle yellow " id="yellow"></span>
+                                             <div className="main-images">
+                                                  <img className="img active" src={`http://localhost:1500/products/${product.photoname}`} alt={product.name} />
+                                             </div>
+                                             <div className="product-details">
+                                                  <span className="product_name">{product.product_name.slice(0, 20) + '...'}</span>
+                                                  <p>{product.description.slice(0, 60) + '...'}</p>
+                                                  <div className="stars">
+                                                       <i class='bx bxs-star' ></i>
+                                                       <i class='bx bxs-star' ></i>
+                                                       <i class='bx bxs-star' ></i>
+                                                       <i class='bx bxs-star' ></i>
+                                                       <i class='bx bx-star' ></i>
                                                   </div>
                                              </div>
-                                             <div class="price">
-                                                  <span class="price_num">₹2,999</span>
+                                             <div className="color-price">
+                                                  <div className="color-option">
+                                                       <span className="color">Colour:</span>
+                                                       <div className="circles">
+                                                            <span class="color-circle blue active" id="blue"></span>
+                                                            <span class="color-circle pink " id="pink"></span>
+                                                            <span class="color-circle yellow " id="yellow"></span>
+                                                       </div>
+                                                  </div>
+                                                  <div className="price">
+                                                       <span className="price_num">₹{product.price}</span>
+                                                  </div>
+                                             </div>
+                                             <div className="button">
+                                                  <div className="button-layer"></div>
+                                                  <button>Add To Cart</button>
                                              </div>
                                         </div>
-                                        <div class="button">
-                                             <div class="button-layer"></div>
-                                             <button>Add To Cart</button>
-                                        </div>
-                                   </div></a>
-                              <div class="product-card">
-                                   <div class="logo-cart">
-                                        <img src="images/Logo.png" alt="logo" className='img' />
-                                        <i class='bx bx-heart'></i>
-                                   </div>
-                                   <div class="main-images">
-                                        <img id="" class="img active" src="images/jacket.jpg" alt="jacket" />
-                                   </div>
-                                   <div class="product-details">
-                                        <span class="product_name">MEN JACKET</span>
-                                        <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                        <div class="stars">
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bx-star' ></i>
-                                        </div>
-                                   </div>
-                                   <div class="color-price">
-                                        <div class="color-option">
-                                             <span class="color">Colour:</span>
-                                             <div class="circles">
-                                                  <span class="color-circle blue active" id="blue"></span>
-                                                  <span class="color-circle pink " id="pink"></span>
-                                                  <span class="color-circle yellow " id="yellow"></span>
-                                             </div>
-                                        </div>
-                                        <div class="price">
-                                             <span class="price_num">₹999</span>
-                                        </div>
-                                   </div>
-                                   <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                   </div>
-                              </div>
-                              <div class="product-card">
-                                   <div class="logo-cart">
-                                        <img src="images/Logo.png" alt="logo" className='img' />
-                                        <i class='bx bx-heart'></i>
-                                   </div>
-                                   <div class="main-images">
-                                        <img class="img active" src="images/jewellery.jpg" alt="jewellery" />
-                                   </div>
-                                   <div class="product-details">
-                                        <span class="product_name">ROSE GOLD EARINGS</span>
-                                        <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                        <div class="stars">
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bx-star' ></i>
-                                        </div>
-                                   </div>
-                                   <div class="color-price">
-                                        <div class="color-option">
-                                             <span class="color">Colour:</span>
-                                             <div class="circles">
-                                                  <span class="color-circle blue active" id="blue"></span>
-                                                  <span class="color-circle pink " id="pink"></span>
-                                                  <span class="color-circle yellow " id="yellow"></span>
-                                             </div>
-                                        </div>
-                                        <div class="price">
-                                             <span class="price_num">₹499</span>
-                                        </div>
-                                   </div>
-                                   <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                   </div>
-                              </div>
-                              <div class="product-card">
-                                   <div class="logo-cart">
-                                        <img src="images/Logo.png" alt="logo" className='img' />
-                                        <i class='bx bx-heart'></i>
-                                   </div>
-                                   <div class="main-images">
-                                        <img class="img active" src="images/watch.jpg" alt="watch" style={{ weight: '50px', height: '160px', padding: '15px' }} />
-                                   </div>
-                                   <div class="product-details">
-                                        <span class="product_name">LUXURY WATCH FOR MEN</span>
-                                        <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                        <div class="stars">
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bx-star' ></i>
-                                        </div>
-                                   </div>
-                                   <div class="color-price">
-                                        <div class="color-option">
-                                             <span class="color">Colour:</span>
-                                             <div class="circles">
-                                                  <span class="color-circle blue active" id="blue"></span>
-                                                  <span class="color-circle pink " id="pink"></span>
-                                                  <span class="color-circle yellow " id="yellow"></span>
-                                             </div>
-                                        </div>
-                                        <div class="price">
-                                             <span class="price_num">₹1999</span>
-                                        </div>
-                                   </div>
-                                   <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                   </div>
-                              </div>
-                              <div class="product-card">
-                                   <div class="logo-cart">
-                                        <img src="images/Logo.png" alt="logo" className='img' />
-                                        <i class='bx bx-heart'></i>
-                                   </div>
-                                   <div class="main-images">
-                                        <img class="img active" src="images/White_Top.png" alt="top" />
-                                   </div>
-                                   <div class="product-details">
-                                        <span class="product_name">GIRLS WHITE TOP </span>
-                                        <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                        <div class="stars">
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bx-star' ></i>
-                                        </div>
-                                   </div>
-                                   <div class="color-price">
-                                        <div class="color-option">
-                                             <span class="color">Colour:</span>
-                                             <div class="circles">
-                                                  <span class="color-circle blue active" id="blue"></span>
-                                                  <span class="color-circle pink " id="pink"></span>
-                                                  <span class="color-circle yellow " id="yellow"></span>
-                                             </div>
-                                        </div>
-                                        <div class="price">
-                                             <span class="price_num">₹399</span>
-                                        </div>
-                                   </div>
-                                   <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                   </div>
-                              </div>
-                              <div class="product-card">
-                                   <div class="logo-cart">
-                                        <img src="images/Logo.png" alt="logo" className='img' />
-                                        <i class='bx bx-heart'></i>
-                                   </div>
-                                   <div class="main-images">
-                                        <img class="img active" src="images/shoes.jpg" alt="shoes" />
-                                   </div>
-                                   <div class="product-details">
-                                        <span class="product_name">MEN'S FORMAL SHOES</span>
-                                        <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                        <div class="stars">
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bx-star' ></i>
-                                        </div>
-                                   </div>
-                                   <div class="color-price">
-                                        <div class="color-option">
-                                             <span class="color">Colour:</span>
-                                             <div class="circles">
-                                                  <span class="color-circle blue active" id="blue"></span>
-                                                  <span class="color-circle pink " id="pink"></span>
-                                                  <span class="color-circle yellow " id="yellow"></span>
-                                             </div>
-                                        </div>
-                                        <div class="price">
-                                             <span class="price_num">₹699</span>
-                                        </div>
-                                   </div>
-                                   <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                   </div>
-                              </div>
-                              <div class="product-card">
-                                   <div class="logo-cart">
-                                        <img src="images/Logo.png" alt="logo" className='img' />
-                                        <i class='bx bx-heart'></i>
-                                   </div>
-                                   <div class="main-images">
-                                        <img class="img active" src="images/heals.jpg" alt="shoes" style={{ padding: '30px', width: '190px' }} />
-                                   </div>
-                                   <div class="product-details">
-                                        <span class="product_name">LOW PUMP HEALS</span>
-                                        <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                        <div class="stars">
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bx-star' ></i>
-                                        </div>
-                                   </div>
-                                   <div class="color-price">
-                                        <div class="color-option">
-                                             <span class="color">Colour:</span>
-                                             <div class="circles">
-                                                  <span class="color-circle blue active" id="blue"></span>
-                                                  <span class="color-circle pink " id="pink"></span>
-                                                  <span class="color-circle yellow " id="yellow"></span>
-                                             </div>
-                                        </div>
-                                        <div class="price">
-                                             <span class="price_num">₹599</span>
-                                        </div>
-                                   </div>
-                                   <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                   </div>
-                              </div>
-                              <div class="product-card">
-                                   <div class="logo-cart">
-                                        <img src="images/Logo.png" alt="logo" className='img' />
-                                        <i class='bx bx-heart'></i>
-                                   </div>
-                                   <div class="main-images">
-                                        <img class="img active" src="images/hoodie.jpg" alt="shoes" style={{ padding: '35px', height: '190px', marginTop: '-10px' }} />
-                                   </div>
-                                   <div class="product-details">
-                                        <span class="product_name">MEN'S FORMAL SHOES</span>
-                                        <p>Lorem ipsum dolor sit lorenm i amet, consectetur adipisicing elit. Eum, ea, ducimus!</p>
-                                        <div class="stars">
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bxs-star' ></i>
-                                             <i class='bx bx-star' ></i>
-                                        </div>
-                                   </div>
-                                   <div class="color-price">
-                                        <div class="color-option">
-                                             <span class="color">Colour:</span>
-                                             <div class="circles">
-                                                  <span class="color-circle blue active" id="blue"></span>
-                                                  <span class="color-circle pink " id="pink"></span>
-                                                  <span class="color-circle yellow " id="yellow"></span>
-                                             </div>
-                                        </div>
-                                        <div class="price">
-                                             <span class="price_num">₹699</span>
-                                        </div>
-                                   </div>
-                                   <div class="button">
-                                        <div class="button-layer"></div>
-                                        <button>Add To Cart</button>
-                                   </div>
-                              </div>
+                                   </Link>
+                              ))}
                          </div>
                     </div>
                     {/* deal of the day */}
@@ -556,7 +379,7 @@ export default function Product() {
                               </div>
                          </div>
                     </div>
-               </main>
-          </div>
+               </main >
+          </div >
      )
 }
