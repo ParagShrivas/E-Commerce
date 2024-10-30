@@ -1,4 +1,10 @@
 .wishlist {
      margin-left: 10%;
-     margin-right: 20%;
+     margin-right: 10%;
+}
+
+.wishlist h4{
+     color: #232323;
+     font-weight: 500;
+     margin: 10px;
 }

@@ -13,6 +13,10 @@
      animation: fadeInOut 5s ease-in-out;
 }
 
+.message {
+     color: #fff;
+}
+
 @keyframes fadeInOut {
      0% {
           opacity: 0;

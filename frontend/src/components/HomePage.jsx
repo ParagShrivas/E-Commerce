@@ -11,6 +11,10 @@ const HomePage = () => {
      const [hide, setHide] = useState(0);
      const [positionColor, setPositionColor] = useState(0);
 
+     useEffect(() => {
+          document.title = "Dream Mall";
+     });
+
      const list = [
           {
                src: "img/slider_images/1.png",
@@ -92,14 +96,14 @@ const HomePage = () => {
                               <div key={index} className={`item ${index === active ? 'active' : ''} ${index === hide ? 'hide' : ''}`}>
                                    <div className="images">
                                         <div className="item_img">
-                                             <img src={item.src.replace(/\d+/, index + 2)} alt="" className='img'/>
+                                             <img src={item.src.replace(/\d+/, index + 2)} alt="" className='img' />
                                         </div>
                                         <div className="item_img">
-                                             <img src={item.src} alt="" className='img'/>
+                                             <img src={item.src} alt="" className='img' />
                                         </div>
                                    </div>
                                    <div className="home-content">
-                                        <img src={item.src.replace(/\d+/, index + 1)} alt="" className='img'/>
+                                        <img src={item.src.replace(/\d+/, index + 1)} alt="" className='img' />
                                         <div className="text">
                                              <h1>{item.title}</h1>
                                              <h3>{item.price}</h3>
@@ -123,8 +127,8 @@ const HomePage = () => {
                     </div>
                </div>
                <Logo />
-               <Product/>
-               <Footer/>
+               <Product />
+               <Footer />
           </>
      );
 };

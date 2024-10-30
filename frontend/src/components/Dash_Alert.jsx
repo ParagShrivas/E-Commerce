@@ -5,7 +5,7 @@ const Dash_Alert = ({ alert }) => {
      return (
           alert && (
                <div className="alert-popup">
-                    <p>{alert.msg}</p>
+                    <p className='message'>{alert.msg}</p>
                </div>
           )
      );

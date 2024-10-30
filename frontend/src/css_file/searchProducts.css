@@ -1,0 +1,13 @@
+.search-results-container{
+     margin-left: 10%;
+     margin-right: 10%;
+}
+
+.delivery-date{
+     margin-top: 15px;
+     font-size: 16px;
+}
+
+.delivery-date i{
+     padding-right: 5px;
+}

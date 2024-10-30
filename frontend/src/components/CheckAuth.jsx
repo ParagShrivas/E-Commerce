@@ -13,6 +13,7 @@ const CheckAuth = () => {
                     if (!token) {
                          console.log('No token found, redirecting to login.');
                          localStorage.removeItem('email');
+                         localStorage.removeItem('user_id');
                          navigate('/login');
                          return;
                     }

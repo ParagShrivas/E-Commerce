@@ -76,6 +76,13 @@ export default function Profile() {
                .catch((error) => console.error('Error fetching users:', error));
      }, [email], []);
 
+     useEffect(() => {
+          if (users.length > 0) {
+               const user = users[0];
+               document.title = `${user.fname} ${user.lname} Profile`;
+          }
+     }, [users]);
+
      const handleDetails = () => {
           setDetails(true)
           setSecurity(false)

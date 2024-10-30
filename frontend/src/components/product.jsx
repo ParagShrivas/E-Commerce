@@ -3,12 +3,22 @@ import { Link } from 'react-router-dom';
 import '../css_file/product.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Dash_Alert from '../components/Dash_Alert';
 
 export default function Product() {
 
      const [products, setProducts] = useState([]);
      const [likedProducts, setLikedProducts] = useState({});
      const email = localStorage.getItem('email');
+     const user_id = localStorage.getItem('user_id');
+     const [alert, setAlert] = useState(null);
+
+     const showAlert = (message) => {
+          setAlert({ msg: message });
+          setTimeout(() => {
+               setAlert(null);
+          }, 5000);
+     };
 
      useEffect(() => {
           const fetchWishlist = async () => {
@@ -84,8 +94,35 @@ export default function Product() {
           })
      }, [])
 
+     const AddToCart = async (product_id) => {
+          try {
+               const response = await fetch(`http://localhost:1500/cart/addToCart`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                         user_id,
+                         product_id
+                    }),
+                    headers: {
+                         'Content-Type': 'application/json',
+                    },
+               });
+
+               const data = await response.json();
+
+               if (!response.ok) {
+                    console.error('Error Adding Product to cart:', data.message);
+                    showAlert(data.message); // Display server message if any issue
+               } else {
+                    showAlert('Product added to cart successfully!');
+               }
+          } catch (error) {
+               console.error('Error :', error);
+          }
+     }
+
      return (
           <div>
+               <Dash_Alert alert={alert} />
                <main>
                     {/*- CATEGORY*/}
                     <div className="category" data-aos="fade-left">
@@ -196,49 +233,50 @@ export default function Product() {
                          <br />
                          <div className="featured-products" data-aos="fade-up">
                               {products.map((product) => (
-                                   <Link to={`/product/detail/${product.product_id}/${encodeURIComponent(product.product_name)}`} target='_blank'>
-                                        <div className="product-card" key={product.id}>
-                                             <div className="logo-cart">
-                                                  <img src="images/Logo.png" alt="logo" className='img' />
-                                                  <i
-                                                       className={likedProducts[product.product_id] ? 'bx bxs-heart' : 'bx bx-heart'}
-                                                       onClick={() => toggleLike(product.product_id)}
-                                                       style={{ color: likedProducts[product.product_id] ? 'red' : 'black' }} // Change color based on liked status
-                                                  ></i>
-                                             </div>
+                                   <div className="product-card" key={product.id}>
+                                        <div className="logo-cart">
+                                             <img src="images/Logo.png" alt="logo" className='img' />
+                                             <i
+                                                  className={likedProducts[product.product_id] ? 'bx bxs-heart' : 'bx bx-heart'}
+                                                  onClick={() => toggleLike(product.product_id)}
+                                                  style={{ color: likedProducts[product.product_id] ? 'red' : 'black' }} // Change color based on liked status
+                                             ></i>
+                                        </div>
+                                        <Link to={`/product/detail/${product.product_id}/${encodeURIComponent(product.product_name)}`}
+                                             target='_blank' className='link'>
                                              <div className="main-images">
                                                   <img className="img active" src={`http://localhost:1500/products/${product.photoname}`} alt={product.name} />
                                              </div>
-                                             <div className="product-details">
-                                                  <span className="product_name">{product.product_name.slice(0, 20) + '...'}</span>
-                                                  <p>{product.description.slice(0, 60) + '...'}</p>
-                                                  <div className="stars">
-                                                       <i class='bx bxs-star' ></i>
-                                                       <i class='bx bxs-star' ></i>
-                                                       <i class='bx bxs-star' ></i>
-                                                       <i class='bx bxs-star' ></i>
-                                                       <i class='bx bx-star' ></i>
-                                                  </div>
-                                             </div>
-                                             <div className="color-price">
-                                                  <div className="color-option">
-                                                       <span className="color">Colour:</span>
-                                                       <div className="circles">
-                                                            <span class="color-circle blue active" id="blue"></span>
-                                                            <span class="color-circle pink " id="pink"></span>
-                                                            <span class="color-circle yellow " id="yellow"></span>
-                                                       </div>
-                                                  </div>
-                                                  <div className="price">
-                                                       <span className="price_num">₹{product.price}</span>
-                                                  </div>
-                                             </div>
-                                             <div className="button">
-                                                  <div className="button-layer"></div>
-                                                  <button>Add To Cart</button>
+                                        </Link>
+                                        <div className="product-details">
+                                             <span className="product_name">{product.product_name.slice(0, 20) + '...'}</span>
+                                             <p>{product.description.slice(0, 60) + '...'}</p>
+                                             <div className="stars">
+                                                  <i class='bx bxs-star' ></i>
+                                                  <i class='bx bxs-star' ></i>
+                                                  <i class='bx bxs-star' ></i>
+                                                  <i class='bx bxs-star' ></i>
+                                                  <i class='bx bx-star' ></i>
                                              </div>
                                         </div>
-                                   </Link>
+                                        <div className="color-price">
+                                             <div className="color-option">
+                                                  <span className="color">Colour:</span>
+                                                  <div className="circles">
+                                                       <span class="color-circle blue active" id="blue"></span>
+                                                       <span class="color-circle pink " id="pink"></span>
+                                                       <span class="color-circle yellow " id="yellow"></span>
+                                                  </div>
+                                             </div>
+                                             <div className="price">
+                                                  <span className="price_num">₹{product.price}</span>
+                                             </div>
+                                        </div>
+                                        <div className="button">
+                                             <div className="button-layer"></div>
+                                             <button onClick={() => AddToCart(product.product_id)}>Add To Cart</button>
+                                        </div>
+                                   </div>
                               ))}
                          </div>
                     </div>

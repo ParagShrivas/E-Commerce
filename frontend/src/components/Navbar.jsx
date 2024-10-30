@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css_file/navbar.css';
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 export default function Navbar() {
-     const location = useLocation();
+     const [searchQuery, setSearchQuery] = useState('');
      const email = localStorage.getItem('email');
-
      const [name, setName] = useState('');
+     const navigate = useNavigate();
 
      useEffect(() => {
           const fetchUserName = async () => {
@@ -19,6 +19,7 @@ export default function Navbar() {
                     const res = await response.json();
                     if (response.ok) {
                          setName(res.fname);
+                         localStorage.setItem('user_id', res.user_id)
                     } else {
                          console.error('Error fetching name:', res.message);
                     }
@@ -38,6 +39,18 @@ export default function Navbar() {
           })
      }, [])
 
+     const handleSearch = async () => {
+          if (searchQuery) {
+               navigate(`/search?q=${searchQuery}`) //navigate to SearchProducts
+          }
+     }
+
+     const handleKeyDown = (event) => {
+          if (event.key === 'Enter') {
+               handleSearch();
+          }
+     };
+
      return (
           <>
                <div className="navbar">
@@ -49,9 +62,10 @@ export default function Navbar() {
 
                          <div className="searchbar">
                               <div className="search">
-                                   <input type="text" placeholder="Search" />
+                                   <input type="text" placeholder="Search"
+                                        onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={handleKeyDown} />
                                    <button className="search-btn">
-                                        <i className='bx bx-search'></i>
+                                        <i className='bx bx-search' onClick={() => handleSearch()}></i>
                                    </button>
                               </div>
                          </div>
@@ -78,7 +92,7 @@ export default function Navbar() {
                                    </div>
                               </Link>
 
-                              <Link to='/' className='Link'>
+                              <Link to='/user/cart' className='Link'>
                                    <div className="icon">
                                         <i className='fas fa-shopping-cart'></i>
                                         <span>My Cart</span>
