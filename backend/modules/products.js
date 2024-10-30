@@ -107,6 +107,41 @@ router.get('/detail/:id', async (req, res) => {
      });
 });
 
+//related products by category
+router.get('/related_products/:category', async (req, res) => {
+     const productCategory = req.params.category;
+     const query = 'SELECT * FROM products WHERE category = $1';
+
+     db.query(query, [productCategory], (err, results) => {
+          if (err) {
+               return res.status(500).json({ message: 'Database error', error: err });
+          }
+
+          if (results.rows.length === 0) {
+               return res.status(404).json({ message: 'Product not found' });
+          }
+
+          return res.status(200).json(results.rows);
+     });
+});
+
+//search products
+router.get('/search_products/:searchQuery', async (req, res) => {
+     const searchQuery = req.params.searchQuery.toLowerCase(); // Fetch the correct parameter and convert it to lowercase
+     const query = `SELECT * FROM products WHERE LOWER(product_name) LIKE $1 OR LOWER(category) LIKE $1 OR LOWER(description) LIKE $1`;
+
+     db.query(query, [`%${searchQuery}%`], (err, results) => {
+          if (err) {
+               return res.status(500).json({ message: 'Database error', error: err });
+          }
+
+          if (results.rows.length === 0) {
+               return res.status(404).json({ message: 'Item not found' });
+          }
+
+          return res.status(200).json(results.rows);
+     });
+});
 
 
 module.exports = router;

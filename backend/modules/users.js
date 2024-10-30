@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 router.get('/email/:email', (req, res) => {
      const email = req.params.email;
 
-     const query = 'SELECT fname FROM users WHERE email = $1'; // Use parameterized query
+     const query = 'SELECT user_id,fname FROM users WHERE email = $1'; // Use parameterized query
 
      db.query(query, [email], (err, results) => {
           if (err) {
