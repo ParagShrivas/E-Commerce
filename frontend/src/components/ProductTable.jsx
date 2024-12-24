@@ -95,7 +95,7 @@ const ProductTable = () => {
         },
         {
             name: 'Stock',
-            selector: (rows) => '₹ ' + rows.quantity,
+            selector: (rows) => rows.quantity,
             width: '110px',
             sortable: true
         },

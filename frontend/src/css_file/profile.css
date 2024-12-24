@@ -74,8 +74,13 @@ h2 {
      width: 100%;
      gap: 10px;
      margin-top: 1.5%;
+     margin-left: 300px;
      align-items: center;
      justify-content: left;
+}
+
+.profile-details .form {
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .profile-details i {
@@ -92,15 +97,20 @@ h2 {
      color: #111111;
 }
 
-.profile-details input {
-     background-color: #d4edfc;
-     height: 50px;
-     font-size: 18px;
-     width: 60%;
+.profile-buttons {
+     display: flex;
+     justify-content: center;
+     gap: 20px;
+}
+
+.pass-input {
+     background-color: #a69af4;
      color: #000;
-     border-radius: 20px;
-     border: 2px solid #343434;
+     width: 100%;
+     height: 40px;
+     border-radius: 10px;
      padding: 10px;
+     font-size: 15px;
 }
 
 .save-button {
@@ -118,6 +128,42 @@ h2 {
      height: 50px;
      padding: 20px;
 }
+
+.profile-card{
+     border: 2px solid #000;
+}
+/* address */
+.Address {
+     margin: 2% 0 5% 0;
+}
+
+.address-form {
+     border: 2px solid #000;
+     margin: 0 15% 0 15%;
+     border-radius: 10px;
+}
+
+.address-form h3 {
+     justify-content: center;
+     padding-bottom: 20px;
+}
+
+.address-input {
+     background-color: transparent;
+     border: 1px solid #000;
+     color: #000;
+     border-radius: 10px;
+     padding: 10px;
+     font-size: 15px;
+     width: 50%;
+     margin: 10px;
+}
+
+.address-form span {
+     display: flex;
+     margin-left: -40%;
+}
+
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {
      .profile-option {
@@ -130,9 +176,10 @@ h2 {
           /* This can stay to define snapping point */
      }
 
-     .save-button{
+     .save-button {
           left: 40%;
      }
+
      .box,
      a {
           width: 100%;
@@ -148,6 +195,10 @@ h2 {
           scroll-snap-type: none;
           /* Removed snapping for smoother scrolling */
           overscroll-behavior-inline: contain;
+     }
+
+     .address-input {
+          width: 80%;
      }
 
      .has-scrollbar {

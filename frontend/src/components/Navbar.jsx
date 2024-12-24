@@ -124,7 +124,7 @@ export default function Navbar() {
                     </li>
                     <li><div class="category-menu">
                          <div class="select-btn">
-                              <span class="sBtn-text">Categories</span>
+                              <span class="sBtn-text">CATEGORIES</span>
                          </div>
                          <ul class="options">
                               <li class="option">

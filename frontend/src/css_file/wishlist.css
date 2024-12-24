@@ -3,7 +3,11 @@
      margin-right: 10%;
 }
 
-.wishlist h4{
+.wishlist .featured-products {
+     justify-content: left;
+}
+
+.wishlist h4 {
      color: #232323;
      font-weight: 500;
      margin: 10px;

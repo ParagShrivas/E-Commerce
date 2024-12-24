@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const CheckAuth = () => {
      const navigate = useNavigate();
+     const location = useLocation();
 
      useEffect(() => {
           const checkAuth = async () => {
@@ -14,7 +15,7 @@ const CheckAuth = () => {
                          console.log('No token found, redirecting to login.');
                          localStorage.removeItem('email');
                          localStorage.removeItem('user_id');
-                         navigate('/login');
+                         navigate('/login', { state: { from: location.pathname } });
                          return;
                     }
 

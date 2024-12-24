@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar';
 import Footer from './Footer';
 import '../css_file/Cart.css';
+import CheckAuth from './CheckAuth';
 import Dash_Alert from '../components/Dash_Alert';
 
 export default function Cart() {
+     CheckAuth();
      const [cartProducts, setCartProducts] = useState([]);
      const [alert, setAlert] = useState(null);
      const user_id = localStorage.getItem('user_id');
+     const navigate = useNavigate();
 
      const showAlert = (message) => {
           setAlert({ msg: message });
@@ -42,6 +46,7 @@ export default function Cart() {
                     const data = await response.json();
                     if (Array.isArray(data.data)) {
                          setCartProducts(data.data);
+
                     } else {
                          console.error('Expected an array but got:', data);
                          showAlert('Failed to load cart products.');
@@ -143,7 +148,7 @@ export default function Cart() {
                               {cartProducts.map((product, index) => (
                                    <div key={index} className="cartItem">
                                         <Link to={`/product/detail/${product.product_id}/${encodeURIComponent(product.product_name)}`}
-                                             target='_blank' className='link' style={{ width: '100px' }}>
+                                             target='_blank' className='link'>
                                              <div className="main-images">
                                                   <img className="img active" src={`http://localhost:1500/products/${product.photoname}`} alt={product.name} />
                                              </div>
@@ -176,7 +181,7 @@ export default function Cart() {
                                                        </button>
                                                   </div>
                                                   <button className='manage-btn'>
-                                                       <i style={{ color: 'red' }} className="fa-regular fa-trash-can"
+                                                       <i className="fa-regular fa-trash-can bin"
                                                             onClick={() => removeFromCart(product.product_id)}></i>
                                                   </button>
                                              </span>
@@ -185,14 +190,16 @@ export default function Cart() {
                               ))}
                               {/* Total Amount Section */}
                               <div className="cart-total">
-                                   <h4>Total Amount: ₹ {calculateTotalAmount()}.00</h4>
+                                   <h4>
+                                        Total Amount: ₹ {calculateTotalAmount().toLocaleString('en-IN')}.00
+                                   </h4>
                               </div>
 
                               {/* Buy Now Button */}
                               <div className="buy-now">
                                    <div className="button">
                                         <div className="button-layer"></div>
-                                        <button>Proceed to Buy</button>
+                                        <button onClick={() => navigate('/user/order')}>Proceed to Buy</button>
                                    </div>
                               </div>
                          </div>

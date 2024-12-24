@@ -33,7 +33,11 @@ async function SendMail(email) {
         from: process.env.EMAIL_USER,
         to: email,
         subject: 'Your OTP Verification Code',
-        text: `Your OTP code is ${otp}. It will expire in 5 minutes.`,
+        html: `
+            <h1>Verification Code</h1>
+            <p>Your OTP code is: <strong>${otp}</strong></p>
+            <p>This code is valid for the next 5 minutes. Please do not share it with anyone.</p>
+        `,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {

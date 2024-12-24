@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import '../css_file/loginStyle.css';
 import '../css_file/otp.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Alert from './Alert';
 import Navbar from './Navbar';
 import '../css_file/Loader.css';
@@ -22,6 +22,8 @@ export default function LoginPage() {
      const inputRefs = useRef([]); // To store references to the input fields
      const [loading, setLoading] = useState(false);
      const [alert, setAlert] = useState(null);
+     const location = useLocation();
+     const from = location.state?.from || '/';
 
      const showAlert = (message) => {
           setAlert({ msg: message });

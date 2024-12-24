@@ -108,7 +108,7 @@ export default function Footer() {
                                         <div className="icon-box">
                                              <ion-icon name="mail-outline" />
                                         </div>
-                                        <a href="gmail:example@gmail.com" className="footer-nav-link">dream_mall@gmail.com</a>
+                                        <a href="mail:example@gmail.com" className="footer-nav-link">dream_mall@gmail.com</a>
                                    </li>
                               </ul>
                               <ul className="footer-nav-list">
