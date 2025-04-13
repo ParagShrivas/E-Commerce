@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import '../css_file/profile.css'
 import Navbar from '../components/Navbar'
 import CheckAuth from '../components/CheckAuth'
@@ -10,7 +10,10 @@ export default function Profile() {
      CheckAuth();
      const [users, setUsers] = useState([])
      const email = localStorage.getItem('email');
+     const user_id = localStorage.getItem('user_id');
+     const [orderedProducts, setOrderedProducts] = useState([]);
      const [detail, setDetails] = useState(true);
+     const [orders, setOrders] = useState(false);
      const [security, setSecurity] = useState(false);
      const [address, setAddress] = useState(false);
      const [loading, setLoading] = useState(false);
@@ -28,6 +31,7 @@ export default function Profile() {
           }, 5000);
      };
 
+     //change password
      const save = async (e) => {
           e.preventDefault();
 
@@ -41,7 +45,7 @@ export default function Profile() {
 
           setLoading(true);
           try {
-               const response = await fetch('http://localhost:1500/login/change_password', {
+               const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/login/change_password', {
                     method: 'POST',
                     headers: {
                          'Content-Type': 'application/json',
@@ -65,9 +69,9 @@ export default function Profile() {
           }
      };
 
-
+     //user data
      useEffect(() => {
-          fetch(`http://localhost:1500/users/data/${email}`)
+          fetch(`https://e-commerce-backend-m4ra.onrender.com/users/data/${email}`)
                .then((response) => response.json())
                .then((data) => {
                     if (Array.isArray(data)) {
@@ -87,6 +91,42 @@ export default function Profile() {
           }
      }, [users]);
 
+     // Fetch order data
+     useEffect(() => {
+          const fetchOrderedProducts = async () => {
+               try {
+                    const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/orders`, {
+                         method: 'POST',
+                         body: JSON.stringify({ user_id }),
+                         headers: {
+                              'Content-Type': 'application/json',
+                         },
+                    });
+
+                    if (!response.ok) {
+                         console.error('Error fetching products:', response.statusText);
+                         return;
+                    }
+
+                    const data = await response.json();
+
+                    if (data.success && Array.isArray(data.data)) {
+                         setOrderedProducts(data.data);
+                    } else {
+                         console.error('Unexpected response format:', data);
+                    }
+               } catch (error) {
+                    console.error('Error fetching products:', error.message);
+               }
+          };
+
+          if (user_id) { // Ensure user_id exists before making the call
+               fetchOrderedProducts();
+          }
+     }, [user_id]);
+
+
+
      const handleDetails = () => {
           setDetails(true)
           setSecurity(false)
@@ -97,10 +137,19 @@ export default function Profile() {
           setSecurity(true)
           setDetails(false)
           setAddress(false)
+          setOrders(false);
      }
 
      const handleAddress = () => {
           setAddress(true)
+          setOrders(false);
+          setDetails(false)
+          setSecurity(false)
+     }
+
+     const handleOrder = () => {
+          setOrders(true);
+          setAddress(false)
           setDetails(false)
           setSecurity(false)
      }
@@ -129,7 +178,7 @@ export default function Profile() {
                     <div className="overlay">
                          <div className="confirm-popup">
                               <h4>Confirm
-                                   <i className="fa-solid fa-xmark" style={{ marginLeft: '250px', cursor: 'pointer' }} onClick={() => { setShowConfirm(false) }}></i>
+                                   <i className="fa-solid fa-xmark cross" onClick={() => { setShowConfirm(false) }}></i>
                               </h4>
                               <p>
                                    <i className="fa-solid fa-triangle-exclamation"></i>
@@ -138,8 +187,8 @@ export default function Profile() {
                               <button className="con-btn" onClick={handleConfirmLogout}>
                                    Yes
                               </button>
-                              <button style={{ backgroundColor: 'transparent', color: '#000', borderColor: 'blue' }}
-                                   className="con-btn" onClick={() => setShowConfirm(false)}>
+                              <button 
+                                   className="con-btn" id='No' onClick={() => setShowConfirm(false)}>
                                    No
                               </button>
                          </div>
@@ -160,7 +209,7 @@ export default function Profile() {
                                    </strong>
                               </button>
                          </div>
-                         <div className="order ">
+                         <div className="order " onClick={handleOrder}>
                               <button>
                                    {/* <i class="fas fa-es"></i> */}
                                    <h4>Your Order</h4>
@@ -368,6 +417,62 @@ export default function Profile() {
                          </form>
                     </div>
                )}
+
+               {/* orders */}
+               {orders && (
+                    <div className="Cart">
+                         <div className="cart-title">
+                              <h3>Your Orders</h3>
+                         </div>
+                         {orderedProducts && orderedProducts.length === 0 ? (
+                              <div className="cart-not-found-container">
+                                   <img className="shopping-img" src="/img/shopping.png" alt="Shopping" />
+                                   <h2 className="shopping-message">Uh-oh, No Order Found</h2>
+                                   <Link to="/" className="home-link">
+                                        Shop Now
+                                   </Link>
+                              </div>
+                         ) : (
+                              <div className="cartItems">
+                                   {orderedProducts &&
+                                        orderedProducts.map((product, index) => (
+                                             <div key={index} className="cartItem">
+                                                  <Link
+                                                       to={`/product/detail/${product.product_id}/${encodeURIComponent(product.product_name)}`}
+                                                       target="_blank"
+                                                       className="link"
+                                                  >
+                                                       <div className="main-images">
+                                                            <img
+                                                                 className="img active"
+                                                                 src={`https://e-commerce-backend-m4ra.onrender.com/products/${product.photoname}`}
+                                                                 alt={product.product_name}
+                                                            />
+                                                       </div>
+                                                  </Link>
+                                                  <div className="product-order-info">
+                                                       <p className="product-name">
+                                                            {product.product_name.length > 25
+                                                                 ? product.product_name.slice(0, 25) + '...'
+                                                                 : product.product_name}
+                                                       </p>
+                                                       <p className="product-price">₹ {product.total_amount?.toLocaleString('en-IN') || 0}.00</p>
+                                                       <p className="product-status">
+                                                            <i className="fa-solid fa-circle"></i> {product.status}
+                                                       </p>
+                                                       <p className="product-review">
+                                                            <i className="fas fa-star"></i> Rate & Review Product
+                                                       </p>
+                                                  </div>
+
+                                             </div>
+                                        ))}
+                              </div>
+                         )}
+                    </div>
+               )}
+
+               <br />
                <Footer />
           </>
      )

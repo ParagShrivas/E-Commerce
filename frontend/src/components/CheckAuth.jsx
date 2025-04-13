@@ -20,7 +20,7 @@ const CheckAuth = () => {
                     }
 
                     // If token is found, send request to validate it
-                    const response = await fetch('http://localhost:1500/login/check-auth', {
+                    const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/login/check-auth', {
                          headers: { Authorization: `Bearer ${token}` },
                     });
 

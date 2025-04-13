@@ -13,7 +13,7 @@ export default function Navbar() {
      useEffect(() => {
           const fetchUserName = async () => {
                try {
-                    const response = await fetch(`http://localhost:1500/users/email/${email}`, {
+                    const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/users/email/${email}`, {
                          method: 'GET'
                     });
                     const res = await response.json();

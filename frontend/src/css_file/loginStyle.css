@@ -278,6 +278,27 @@ form.sign-in-form {
   pointer-events: all;
 }
 
+.resend-btn {
+  padding: 10px 20px;
+  /* background-color: #007bff; */
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.resend-btn:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.resend-btn.disabled {
+  color: #666;
+  cursor: not-allowed;
+}
+
 @media (max-width: 870px) {
   .container {
     min-height: 800px;

@@ -15,7 +15,7 @@ export default function Users() {
      const [selectedUser, setSelectedUser] = useState(null);
 
      useEffect(() => {
-          fetch('http://localhost:1500/users')
+          fetch('https://e-commerce-backend-m4ra.onrender.com/users')
                .then((response) => response.json())
                .then((data) => {
                     if (Array.isArray(data)) {
@@ -36,7 +36,7 @@ export default function Users() {
 
      const handleConfirmDelete = async () => {
           try {
-               const response = await fetch(`http://localhost:1500/users/delete/${selectedUser.product_id}`, {
+               const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/users/delete/${selectedUser.product_id}`, {
                     method: 'post',
                });
 

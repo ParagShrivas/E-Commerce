@@ -28,7 +28,7 @@ export default function Order() {
      useEffect(() => {
           const fetchCartItems = async () => {
                try {
-                    const response = await fetch(`http://localhost:1500/cart/show`, {
+                    const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/cart/show`, {
                          method: 'POST',
                          body: JSON.stringify({ user_id }),
                          headers: {
@@ -100,7 +100,7 @@ export default function Order() {
           setLoading(true); // Start loading
 
           try {
-               const response = await fetch('http://localhost:1500/place_order/', {
+               const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/place_order/', {
                     method: 'POST',
                     headers: {
                          'Content-Type': 'application/json',
