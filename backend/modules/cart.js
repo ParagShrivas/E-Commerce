@@ -59,9 +59,6 @@ router.post('/show', async (req, res) => {
     }
 });
 
-
-
-
 router.post('/addToCart', async (req, res) => {
     const { user_id, product_id, quantity = 1 } = req.body;
 

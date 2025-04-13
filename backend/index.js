@@ -8,6 +8,7 @@ const users = require('./modules/users');
 const cart = require('./modules/cart')
 const wishlist = require('./modules/wishlist')
 const place_order = require('./modules/place_order')
+const orders = require('./modules/orders')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use('/users', users);
 app.use('/cart', cart);
 app.use('/wishlist', wishlist);
 app.use('/place_order', place_order);
+app.use('/orders', orders);
 
 // Start the server
 app.listen(port, () => {

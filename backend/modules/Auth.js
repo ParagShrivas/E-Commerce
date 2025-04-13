@@ -178,6 +178,17 @@ router.post('/verify-otp', async (req, res) => {
     }
 });
 
+
+//OTP resend
+router.post('/resend-otp', async (req, res) => {
+    const { email } = req.body;
+
+    if (SendMail(email)) {
+        return res.status(202).json({ message: 'OTP Successfully send in you mail' });
+    }
+
+});
+
 router.get('/check-auth', checkAuth, (req, res) => {
     // If we reach here, the token is valid
     return res.status(200).json({ message: 'Token is valid' });
