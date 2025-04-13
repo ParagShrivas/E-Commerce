@@ -1,0 +1,128 @@
+.order_page {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: flex-start;
+     margin: 2% 10% 5% 10%;
+}
+
+h3 {
+     font-family: Georgia, serif;
+     font-size: 24px;
+     margin-top: 30px;
+     margin-bottom: 30px;
+}
+
+.address {
+     display: flexbox;
+}
+
+.address input {
+     border: 2px solid #76aed9;
+     border-radius: 10px;
+     padding: 10px;
+     margin-right: 10px;
+     margin-bottom: 10px;
+     width: 288px;
+}
+
+#email,
+#ph_number {
+     width: 585px;
+}
+
+.total_amount {
+     flex-shrink: 0;
+     width: 40%;
+     margin-left: auto;
+}
+
+.amount {
+     display: flex;
+     align-items: start;
+     justify-content: space-between;
+}
+
+.total_amount p,
+b {
+     font-size: 15px;
+     color: #382b2b;
+}
+
+.total_amount p:hover {
+     color: #000;
+}
+
+label {
+     border: 2px solid #76aed9;
+     border-radius: 10px;
+     padding: 10px;
+     font-size: 18px;
+     margin-bottom: 10px;
+}
+
+label:hover {
+     background-color: #c6dcfd;
+     border-color: #382b2b;
+}
+
+.custom-radio {
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+}
+
+.custom-radio input[type="radio"] {
+     display: none;
+}
+
+.radio-circle {
+     width: 20px;
+     height: 20px;
+     border: 2px solid #5961f0;
+     border-radius: 50%;
+     position: relative;
+     margin-right: 10px;
+     transition: background-color 0.2s ease;
+}
+
+.custom-radio input[type="radio"]:checked+.radio-circle {
+     background-color: #5961f0;
+}
+
+.custom-radio input[type="radio"]:checked+.radio-circle::after {
+     content: '';
+     width: 10px;
+     height: 10px;
+     background: white;
+     border-radius: 50%;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 845px) {
+
+     .order_page {
+          flex-direction: column;
+          align-items: flex-start;
+     }
+
+     .total_amount {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 20px;
+     }
+
+     #email,
+     #ph_number,
+     input {
+          width: 288px;
+     }
+
+     .total_amount p {
+          word-spacing: 150px;
+     }
+}

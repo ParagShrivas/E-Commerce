@@ -1,0 +1,79 @@
+.Product_Table_container {
+     display: flex;
+     align-items: flex-start;
+}
+
+.Datatable {
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     padding: 10px;
+     width: 75em;
+     color: #000;
+}
+
+.search-filter {
+     background-color: #7aabf5;
+     width: 250px;
+     height: 40px;
+     padding: 10px;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 16px;
+     border-radius: 10px;
+     border: 2px solid #000;
+     color: #fff;
+}
+
+.search-filter::placeholder {
+     color: #fff;
+     font-size: 15px;
+}
+
+.manage-btn {
+     font-size: 20px;
+     color: #7aabf5;
+     background-color: transparent;
+}
+
+.manage-btn i {
+     padding: 7px;
+     border: 2px solid #000;
+     margin-right: 10px;
+     border-radius: 100%;
+}
+
+.delete-btn {
+     color: #fff;
+     background-color: rgb(234, 49, 24);
+     width: 100px;
+     height: 40px;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 16px;
+     border: 2px solid #000;
+     border-radius: 10px;
+     position: absolute;
+     right: 81%;
+}
+
+.delete-btn i {
+     padding: 5px;
+}
+
+.add-btn {
+     color: #fff;
+     background-color: rgb(119, 104, 235);
+     width: 100px;
+     height: 40px;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     font-size: 16px;
+     border: 2px solid #000;
+     border-radius: 10px;
+     position: absolute;
+     right: 90%;
+}
+
+.add-btn i {
+     padding: 5px;
+}
+
+button {
+     cursor: pointer;
+}
