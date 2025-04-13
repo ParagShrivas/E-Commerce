@@ -5,7 +5,7 @@ const db = require('./db');
 require('dotenv').config();
 
 router.get('/', (req, res) => {
-     const query = 'SELECT * FROM users';
+     const query = 'SELECT * FROM public.users';
 
      db.query(query, (err, results) => {
           if (err) {
