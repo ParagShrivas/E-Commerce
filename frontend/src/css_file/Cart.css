@@ -38,10 +38,12 @@
      padding: 15px;
      border: 1px solid #ddd;
      border-radius: 8px;
+     width: 90%;
 }
 
 .cartItem:hover {
      background-color: #e0dede;
+     border: 1px solid #000;
 }
 
 

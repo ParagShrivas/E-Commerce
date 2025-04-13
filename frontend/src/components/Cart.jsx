@@ -29,7 +29,7 @@ export default function Cart() {
      useEffect(() => {
           const fetchCartProducts = async () => {
                try {
-                    const response = await fetch(`http://localhost:1500/cart/show`, {
+                    const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/cart/show`, {
                          method: 'POST',
                          body: JSON.stringify({ user_id }),
                          headers: {
@@ -75,7 +75,7 @@ export default function Cart() {
           if (newQuantity > 1) {
                const changeQuantity = async () => {
                     try {
-                         const response = await fetch(`http://localhost:1500/cart/change_quantity`, {
+                         const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/cart/change_quantity`, {
                               method: 'POST',
                               body: JSON.stringify({ user_id, product_id, quantity: newQuantity }),
                               headers: {
@@ -101,7 +101,7 @@ export default function Cart() {
      // Remove item from cart
      const removeFromCart = async (product_id) => {
           try {
-               const response = await fetch(`http://localhost:1500/cart/remove`, {
+               const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/cart/remove`, {
                     method: 'DELETE',
                     body: JSON.stringify({ user_id, product_id }),
                     headers: {
@@ -150,7 +150,7 @@ export default function Cart() {
                                         <Link to={`/product/detail/${product.product_id}/${encodeURIComponent(product.product_name)}`}
                                              target='_blank' className='link'>
                                              <div className="main-images">
-                                                  <img className="img active" src={`http://localhost:1500/products/${product.photoname}`} alt={product.name} />
+                                                  <img className="img active" src={`https://e-commerce-backend-m4ra.onrender.com/products/${product.photoname}`} alt={product.name} />
                                              </div>
                                         </Link>
                                         <div className="product-info">

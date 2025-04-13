@@ -28,7 +28,7 @@ export default function DetailPage() {
           // Fetch product details by ID
           const fetchProduct = async () => {
                try {
-                    const response = await fetch(`http://localhost:1500/products/detail/${id}`);
+                    const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/products/detail/${id}`);
                     if (!response.ok) {
                          throw new Error('Product not found');
                     }
@@ -42,7 +42,7 @@ export default function DetailPage() {
           //fetch wishlist
           const fetchWishlist = async () => {
                try {
-                    const response = await fetch(`http://localhost:1500/wishlist/userLike/${email}`);
+                    const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/wishlist/userLike/${email}`);
                     const data = await response.json();
                     if (Array.isArray(data)) {
                          const likedProductsMap = {};
@@ -70,7 +70,7 @@ export default function DetailPage() {
                //fetch related products by category
                const fetchRelatedProduct = async () => {
                     try {
-                         const response = await fetch(`http://localhost:1500/products/related_products/${product.category}`);
+                         const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/products/related_products/${product.category}`);
                          if (!response.ok) {
                               throw new Error('Products not found');
                          }
@@ -120,7 +120,7 @@ export default function DetailPage() {
           const isLiked = !likedProducts[id];
           const wishlist = async () => {
                try {
-                    const response = await fetch(`http://localhost:1500/wishlist/${email}/${id}`, {
+                    const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/wishlist/${email}/${id}`, {
                          method: 'POST',
                          body: JSON.stringify({ liked: isLiked }), // Include the liked status if necessary
                          headers: {
@@ -157,7 +157,7 @@ export default function DetailPage() {
      //Function to handle to Add to cart 
      const AddToCart = async () => {
           try {
-               const response = await fetch(`http://localhost:1500/cart/addToCart`, {
+               const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/cart/addToCart`, {
                     method: 'POST',
                     body: JSON.stringify({
                          user_id,
@@ -192,7 +192,7 @@ export default function DetailPage() {
                          onClick={() => toggleLike(id)}
                          style={{ color: likedProducts[id] ? 'red' : 'black' }} // Change color based on liked status
                     ></i>
-                    <img src={`http://localhost:1500/products/${product.photoname}`} alt={product.name} />
+                    <img src={`https://e-commerce-backend-m4ra.onrender.com/products/${product.photoname}`} alt={product.name} />
                     <div className="product_details">
                          <p>{product.product_name}</p>
                          <div className="stars">
@@ -265,7 +265,7 @@ export default function DetailPage() {
                                                   ></i>
                                              </div>
                                              <div className="main-images">
-                                                  <img className="img active" src={`http://localhost:1500/products/${product.photoname}`} alt={product.name} />
+                                                  <img className="img active" src={`https://e-commerce-backend-m4ra.onrender.com/products/${product.photoname}`} alt={product.name} />
                                              </div>
                                              <div className="product-details">
                                                   <span className="product_name">{product.product_name.slice(0, 20) + '...'}</span>

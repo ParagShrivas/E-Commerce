@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../css_file/loginStyle.css';
 import '../css_file/otp.css';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -41,7 +41,7 @@ export default function LoginPage() {
           const data = { email, password };
 
           try {
-               const response = await fetch('http://localhost:1500/login', {
+               const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/login', {
                     method: 'POST',
                     headers: {
                          'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export default function LoginPage() {
           const UserData = { fname, lname, email, password, password2 };
 
           try {
-               const response = await fetch('http://localhost:1500/login/register/user', {
+               const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/login/register/user', {
                     method: 'POST',
                     headers: {
                          'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ export default function LoginPage() {
      const verifyOtp = async () => {
           const enteredOtp = otp.join('');
           try {
-               const response = await fetch('http://localhost:1500/login/verify-otp', {
+               const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/login/verify-otp', {
                     method: 'POST',
                     headers: {
                          'Content-Type': 'application/json',
@@ -145,6 +145,50 @@ export default function LoginPage() {
                console.error('Error during OTP verification:', error);
           }
      };
+
+     //otp resend button
+     const [isDisabled, setIsDisabled] = useState(false);
+     const [timer, setTimer] = useState(0);
+
+     const handleResendClick = () => {
+          if (!isDisabled) {
+               setIsDisabled(true); // Disable the button
+               setTimer(60); // Start the 1-minute timer
+          }
+          const handleResendOTP = async () => {
+               try {
+                    const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/login/resend-otp', {
+                         method: 'POST',
+                         headers: {
+                              'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ email }),
+                    });
+
+                    const data = await response.json();
+                    if (response.ok) {
+                         showAlert('OTP has been resent!');
+                    } else {
+                         console.error(data.message);
+                    }
+               } catch (error) {
+                    console.error('Error resending OTP:', error);
+               }
+          };
+          handleResendOTP();
+     };
+
+     useEffect(() => {
+          let interval;
+          if (timer > 0) {
+               interval = setInterval(() => {
+                    setTimer(prev => prev - 1);
+               }, 1000);
+          } else if (timer === 0) {
+               setIsDisabled(false); // Enable the button after the timer ends
+          }
+          return () => clearInterval(interval); // Clean up the interval
+     }, [timer]);
 
      return (
           <>
@@ -296,6 +340,13 @@ export default function LoginPage() {
 
                                    <button className="btn solid" onClick={verifyOtp}>
                                         Verify OTP
+                                   </button>
+                                   <button
+                                        onClick={handleResendClick}
+                                        disabled={isDisabled}
+                                        className={`resend-btn ${isDisabled ? 'disabled' : ''}`}
+                                   >
+                                        {isDisabled ? `Resend OTP in ${timer}s` : 'Resend OTP'}
                                    </button>
                               </div>
                          </div>

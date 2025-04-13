@@ -129,9 +129,10 @@ h2 {
      padding: 20px;
 }
 
-.profile-card{
+.profile-card {
      border: 2px solid #000;
 }
+
 /* address */
 .Address {
      margin: 2% 0 5% 0;
@@ -162,6 +163,70 @@ h2 {
 .address-form span {
      display: flex;
      margin-left: -40%;
+}
+
+.product-order-info {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     /* Adjust spacing */
+     gap: 40px;
+     /* Adjust spacing between items */
+     padding: 10px;
+     border-top: 1px solid #ddd;
+     /* Optional: for separation */
+     font-size: 14px;
+}
+
+.product-order-info .product-name {
+     flex: 2;
+     /* Adjust to give more space for the name */
+     white-space: nowrap;
+     /* Prevent text wrapping */
+     overflow: hidden;
+     text-overflow: ellipsis;
+     /* Show '...' for overflow */
+}
+
+.product-order-info .product-price {
+     flex: 1;
+     /* Adjust space for price */
+     text-align: right;
+     font-weight: bold;
+     color: #333;
+}
+
+.product-order-info .product-status {
+     flex: 1;
+     text-align: center;
+     color: green;
+     /* Change color based on status */
+     font-size: 12px;
+}
+
+.product-order-info .product-review {
+     flex: 1;
+     text-align: center;
+     color: #007bff;
+     /* Blue color for the review link */
+     cursor: pointer;
+     font-size: 12px;
+}
+
+.product-order-info .product-review:hover {
+     text-decoration: underline;
+     /* Add hover effect */
+}
+
+.cross{
+     margin-left: 70%;
+     cursor: pointer;
+}
+
+#No{
+     background-color: transparent;
+     color: #000;
+     border-color: blue;
 }
 
 /* Media Queries for responsiveness */
@@ -224,4 +289,5 @@ h2 {
      .has-scrollbar::-webkit-scrollbar-thumb:hover {
           background: hsl(0, 0%, 80%);
      }
+
 }

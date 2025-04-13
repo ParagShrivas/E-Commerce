@@ -17,7 +17,7 @@ const ProductTable = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:1500/products')
+        fetch('https://e-commerce-backend-m4ra.onrender.com/products')
             .then((response) => response.json())
             .then((data) => {
                 if (Array.isArray(data)) {
@@ -53,7 +53,7 @@ const ProductTable = () => {
 
     const handleConfirmDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:1500/products/delete/${selectedProduct.product_id}`, {
+            const response = await fetch(`https://e-commerce-backend-m4ra.onrender.com/products/delete/${selectedProduct.product_id}`, {
                 method: 'post',
             });
 
@@ -73,7 +73,7 @@ const ProductTable = () => {
     const columns = [
         {
             name: 'Photo',
-            selector: (rows) => <img width={100} src={`http://localhost:1500/products/${rows.photoname}`} alt={rows.product_name} />,
+            selector: (rows) => <img width={100} src={`https://e-commerce-backend-m4ra.onrender.com/products/${rows.photoname}`} alt={rows.product_name} />,
             width: '130px'
         },
         {
@@ -158,7 +158,7 @@ const ProductTable = () => {
         formData.append('photo', photo || selectedManageProduct.photoname);
 
         try {
-            const response = await fetch('http://localhost:1500/products/update', {
+            const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/products/update', {
                 method: 'POST',
                 body: formData,
             });
@@ -186,7 +186,7 @@ const ProductTable = () => {
                         <h4>Confirm
                             <i className="fa-solid fa-xmark" style={{ marginLeft: '250px', cursor: 'pointer' }} onClick={() => { handleDeleteClick(false) }}></i>
                         </h4>
-                        <img src={`http://localhost:1500/products/${selectedProduct.photoname}`} alt="" width={'200px'} height={'200px'} />
+                        <img src={`https://e-commerce-backend-m4ra.onrender.com/products/${selectedProduct.photoname}`} alt="" width={'200px'} height={'200px'} />
                         <p>
                             <i className="fa-solid fa-triangle-exclamation"></i>
                             Are you sure you want to delete `{selectedProduct.product_name.slice(0, 25) + '...'}`?
@@ -209,7 +209,7 @@ const ProductTable = () => {
                         <h3 style={{ color: '#3b3837' }}>Product Details
                             <i className="fa-solid fa-xmark" style={{ marginLeft: '220px', cursor: 'pointer' }} onClick={() => { handleManageClick(false) }}></i>
                         </h3>
-                        <img src={photoURL ? photoURL : `http://localhost:1500/products/${selectedManageProduct.photoname}`} alt="" width={'200px'} height={'200px'} />
+                        <img src={photoURL ? photoURL : `https://e-commerce-backend-m4ra.onrender.com/products/${selectedManageProduct.photoname}`} alt="" width={'200px'} height={'200px'} />
                         <p>Image size must be less than 2MB</p>
                         <input id='file' type="file" onChange={handlePhotoChange} hidden />
                         <button className="select-image" onClick={() => document.getElementById('file').click()}>
