@@ -59,7 +59,7 @@ const ProductForm = () => {
           formData.append('photo', photo);
 
           try {
-               const response = await fetch('http://localhost:1500/products/add_product', {
+               const response = await fetch('https://e-commerce-backend-m4ra.onrender.com/products/add_product', {
                     method: 'POST',
                     body: formData,
                });
