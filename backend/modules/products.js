@@ -125,6 +125,24 @@ router.get('/related_products/:category', async (req, res) => {
      });
 });
 
+//featured products by type
+router.get('/featured_products/:type', async (req, res) => {
+     const productType = req.params.type;
+     const query = 'SELECT * FROM products WHERE type = $1';
+
+     db.query(query, [productType], (err, results) => {
+          if (err) {
+               return res.status(500).json({ message: 'Database error', error: err });
+          }
+
+          if (results.rows.length === 0) {
+               return res.status(404).json({ message: 'Product not found' });
+          }
+
+          return res.status(200).json(results.rows);
+     });
+});
+
 //search products
 router.get('/search_products/:searchQuery', async (req, res) => {
      const searchQuery = req.params.searchQuery.toLowerCase(); // Fetch the correct parameter and convert it to lowercase
