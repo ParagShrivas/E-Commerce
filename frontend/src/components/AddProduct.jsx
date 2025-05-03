@@ -10,6 +10,7 @@ const ProductForm = () => {
      const [quantity, setQuantity] = useState('');
      const [photo, setPhoto] = useState(null);
      const [category, setCategory] = useState('');
+     const [type, setType] = useState('');
      const [imagePreview, setImagePreview] = useState(null);
 
      const handleFocus = (e) => {
@@ -56,6 +57,7 @@ const ProductForm = () => {
           formData.append('price', price);
           formData.append('quantity', quantity);
           formData.append('category', category);
+          formData.append('type', type);
           formData.append('photo', photo);
 
           try {
@@ -177,7 +179,19 @@ const ProductForm = () => {
                                         <label>Category</label>
                                         <span>Category</span>
                                    </div>
-
+                                   <div className="input-container">
+                                        <input
+                                             type="text"
+                                             name="type"
+                                             className="input"
+                                             value={type}
+                                             onChange={(e) => setType(e.target.value)}
+                                             onFocus={handleFocus}
+                                             onBlur={handleBlur}
+                                        />
+                                        <label>Type</label>
+                                        <span>Type</span>
+                                   </div>
                                    <div className="input-container textarea">
                                         <textarea
                                              name="description"
