@@ -10,6 +10,7 @@ export default function DetailPage() {
      const [quantity, setQuantity] = useState(1);
      const [product, setProduct] = useState(null); // Store product data
      const [relatedProduct, setRelatedProduct] = useState([]); // Store related product data
+     const [featuredProduct, setFeaturedProduct] = useState([]); // Store featured product data
      const [error, setError] = useState(false);    // Store error state
      const [likedProducts, setLikedProducts] = useState({});
      const email = localStorage.getItem('email');
@@ -81,6 +82,29 @@ export default function DetailPage() {
                     }
                };
                fetchRelatedProduct();
+          }
+
+     }, [product]);
+
+     // Set the title when this component is rendered
+     useEffect(() => {
+          if (product) {
+               document.title = product.product_name + " | Dreammall.com";
+
+               //fetch related products by category
+               const fetchFeaturedProduct = async () => {
+                    try {
+                         const response = await fetch(`http://localhost:1500/products/featured_products/${product.type}`);
+                         if (!response.ok) {
+                              throw new Error('Products not found');
+                         }
+                         const data = await response.json();
+                         setFeaturedProduct(data);
+                    } catch (error) {
+                         setError(true); // Set error state if there's an issue
+                    }
+               };
+               fetchFeaturedProduct();
           }
 
      }, [product]);
@@ -236,6 +260,73 @@ export default function DetailPage() {
                               <div className="button-layer"></div>
                               <button onClick={AddToCart}>Add To Cart</button>
                          </div>
+                    </div>
+               </div>
+               {/*- Featured PRODUCT*/}
+               <div className="home-container ">
+                    <h3 style={{ color: '#545352' }}>Featured Products</h3>
+                    <br />
+                    <div className="featured-products" data-aos="fade-up">
+                         <button className="scroll-button left" onClick={scrollLeft}>
+                              &#10094;
+                         </button> {/* Left scroll button */}
+
+                         <div className='category-item-container has-scrollbar' ref={containerRef}>
+                              {featuredProduct.map((product) => (
+                                   <Link
+                                        to={`/product/detail/${product.product_id}/${encodeURIComponent(product.product_name)}`}
+                                        target='_blank'
+                                        className='link'
+                                        key={product.product_id}  // Key moved here for better performance
+                                   >
+                                        <div className="product-card">
+                                             <div className="logo-cart">
+                                                  <img src="/images/Logo.png" alt="logo" className='img' />
+                                                  <i
+                                                       className={likedProducts[product.product_id] ? 'bx bxs-heart' : 'bx bx-heart'}
+                                                       onClick={() => toggleLike(product.product_id)}
+                                                       style={{ color: likedProducts[product.product_id] ? 'red' : 'black' }}
+                                                  ></i>
+                                             </div>
+                                             <div className="main-images">
+                                                  <img className="img active" src={`http://localhost:1500/products/${product.photoname}`} alt={product.name} />
+                                             </div>
+                                             <div className="product-details">
+                                                  <span className="product_name">{product.product_name.slice(0, 20) + '...'}</span>
+                                                  <p>{product.description.slice(0, 60) + '...'}</p>
+                                                  <div className="stars">
+                                                       <i className='bx bxs-star' ></i>
+                                                       <i className='bx bxs-star' ></i>
+                                                       <i className='bx bxs-star' ></i>
+                                                       <i className='bx bxs-star' ></i>
+                                                       <i className='bx bx-star' ></i>
+                                                  </div>
+                                             </div>
+                                             <div className="color-price">
+                                                  <div className="color-option">
+                                                       <span className="color">Colour:</span>
+                                                       <div className="circles">
+                                                            <span className="color-circle blue active" id="blue"></span>
+                                                            <span className="color-circle pink" id="pink"></span>
+                                                            <span className="color-circle yellow" id="yellow"></span>
+                                                       </div>
+                                                  </div>
+                                                  <div className="price">
+                                                       <span className="price_num">₹{product.price}</span>
+                                                  </div>
+                                             </div>
+                                             <div className="button">
+                                                  <div className="button-layer"></div>
+                                                  <button>Add To Cart</button>
+                                             </div>
+                                        </div>
+                                   </Link>
+                              ))}
+                         </div>
+
+                         <button className="scroll-button right" onClick={scrollRight}>
+                              &#10095;
+                         </button> {/* Right scroll button */}
                     </div>
                </div>
                {/*- RELATED PRODUCT*/}
